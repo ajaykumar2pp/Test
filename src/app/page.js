@@ -8,7 +8,7 @@ import Features from "@/components/Features";
 
 export default function Home() {
   return (
-    <div>
+    <>
       {/* components rendered on the home page */}
       <Navbar />  
       <Hero />
@@ -17,6 +17,6 @@ export default function Home() {
       <Testimonials />
       <FAQ />
       <Footer />
-    </div>
+    </>
   );
 }

@@ -16,7 +16,7 @@ CREATE TABLE "user" (
 );
 
 -- CreateTable
-CREATE TABLE "ResumeAnalysis" (
+CREATE TABLE "resume_analyses" (
     "id" TEXT NOT NULL,
     "atsScore" INTEGER NOT NULL,
     "matchPercentage" INTEGER NOT NULL,
@@ -32,11 +32,25 @@ CREATE TABLE "ResumeAnalysis" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "userId" TEXT NOT NULL,
 
-    CONSTRAINT "ResumeAnalysis_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "resume_analyses_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "feedbacks" (
+    "id" TEXT NOT NULL,
+    "rating" INTEGER NOT NULL,
+    "message" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "feedbacks_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
 CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
 
 -- AddForeignKey
-ALTER TABLE "ResumeAnalysis" ADD CONSTRAINT "ResumeAnalysis_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "resume_analyses" ADD CONSTRAINT "resume_analyses_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "feedbacks" ADD CONSTRAINT "feedbacks_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;

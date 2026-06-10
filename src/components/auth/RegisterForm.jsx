@@ -11,7 +11,6 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import Link from "next/link";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { FaMale, FaFemale } from "react-icons/fa";
 import Image from "next/image";
 
 const RegisterForm = () => {

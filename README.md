@@ -55,3 +55,17 @@ Results-driven Full Stack Web Developer with experience in building responsive a
 3. Recruiter Readability
 4. Missing Skills
 5. Missing Keywords
+
+
+👍 Neutral / Balanced Feedback
+“Good tool for resume review, but some suggestions could be more detailed.”
+“Helpful for beginners, especially for understanding ATS keywords.”
+“It gave me a clear direction to improve my resume structure.”
+“Useful feedback, but I would like more industry-specific suggestions.”
+“Overall good experience, helped me identify missing sections in my resume.”
+⚠️ Critical / Improvement Feedback (good for realism)
+“The suggestions are useful, but sometimes they feel too generic.”
+“It helped, but I expected more deep analysis of my experience section.”
+“UI is good, but feedback could include more examples.”
+“Good start, but needs better accuracy for technical roles.”
+“Some recommendations were repetitive and not very actionable.”

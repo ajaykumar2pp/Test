@@ -1,9 +1,4 @@
-import {
-  LayoutDashboard,
-  Users,
-  Settings,
-  Upload
-} from "lucide-react";
+import { LayoutDashboard, Users, Upload, MessageSquare } from "lucide-react";
 
 export const dashboardNav = {
   ADMIN: [
@@ -17,11 +12,6 @@ export const dashboardNav = {
       url: "/admin/users",
       icon: Users,
     },
-    // {
-    //   title: "Settings",
-    //   url: "/admin/settings",
-    //   icon: Settings,
-    // },
   ],
 
   USER: [
@@ -32,13 +22,13 @@ export const dashboardNav = {
     },
     {
       title: "Upload Resume",
-       url: "/user/upload-resume",
+      url: "/user/upload-resume",
       icon: Upload,
     },
-    // {
-    //   title: "Settings",
-    //   url: "/user/settings",
-    //   icon: Settings,
-    // },
+    {
+      title: "Feedback",
+      url: "/user/feedback",
+      icon: MessageSquare,
+    },
   ],
 };

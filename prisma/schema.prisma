@@ -27,6 +27,7 @@ model User {
 
   // Relation
   resumeAnalyses ResumeAnalysis[]
+  feedbacks     Feedback[]
 
   @@map("user")
 }
@@ -54,4 +55,20 @@ model ResumeAnalysis {
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("resume_analyses")
+}
+
+
+model Feedback {
+  id        String   @id @default(cuid())
+  rating    Int
+  message   String
+
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@map("feedbacks")
 }

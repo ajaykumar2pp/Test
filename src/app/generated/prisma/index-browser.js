@@ -148,6 +148,14 @@ exports.Prisma.ResumeAnalysisScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.FeedbackScalarFieldEnum = {
+  id: 'id',
+  rating: 'rating',
+  message: 'message',
+  userId: 'userId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -169,7 +177,8 @@ exports.Role = exports.$Enums.Role = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  ResumeAnalysis: 'ResumeAnalysis'
+  ResumeAnalysis: 'ResumeAnalysis',
+  Feedback: 'Feedback'
 };
 
 /**
