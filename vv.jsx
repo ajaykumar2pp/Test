@@ -211,6 +211,10 @@ RESUME:
 ${resumeText}
 `;
 
+    // =========================
+    // AI RESPONSE
+    // =========================
+
     const aiResponse = await analyzeResume(prompt);
 
     const cleanResponse = aiResponse
@@ -219,12 +223,28 @@ ${resumeText}
       .trim();
 
     const analysis = JSON.parse(cleanResponse);
-    // console.log("AI Analysis:", analysis);
+    console.log("AI Analysis:", analysis);
 
+    // =========================
     // DATABASE SAVE
+    // =========================
+
     const savedAnalysis = await prisma.resumeAnalysis.create({
       data: {
-        aiAnalysis: analysis,
+        atsScore: analysis.atsScore || 0,
+
+        matchPercentage: analysis.matchPercentage || 0,
+
+        resumeQuality: analysis.resumeScoreGauge?.resumeQuality || 0,
+
+        recruiterReadability:
+          analysis.resumeScoreGauge?.recruiterReadability || 0,
+
+        missingSkills: analysis.skillMatchAnalysis?.missingSkills || [],
+
+        missingKeywords: analysis.missingKeywordsAnalysis?.keywords || [],
+
+        finalVerdict: analysis.finalVerdict || "",
 
         // File Details
         fileUrl: viewUrl,
@@ -237,11 +257,14 @@ ${resumeText}
       },
     });
 
-    // console.log("Saved Analysis:", savedAnalysis);
+    // =========================
+    // RESPONSE
+    // =========================
 
     return NextResponse.json({
       success: true,
-      id: savedAnalysis.id,
+      analysis,
+      savedAnalysis,
     });
   } catch (error) {
     console.error(error);

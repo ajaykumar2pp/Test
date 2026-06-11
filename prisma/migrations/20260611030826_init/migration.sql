@@ -18,13 +18,7 @@ CREATE TABLE "user" (
 -- CreateTable
 CREATE TABLE "resume_analyses" (
     "id" TEXT NOT NULL,
-    "atsScore" INTEGER NOT NULL,
-    "matchPercentage" INTEGER NOT NULL,
-    "resumeQuality" INTEGER NOT NULL,
-    "recruiterReadability" INTEGER NOT NULL,
-    "missingSkills" TEXT[],
-    "missingKeywords" TEXT[],
-    "finalVerdict" TEXT,
+    "aiAnalysis" JSONB,
     "fileUrl" TEXT,
     "fileName" TEXT,
     "fileSize" INTEGER,

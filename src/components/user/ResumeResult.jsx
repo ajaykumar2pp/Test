@@ -2,36 +2,14 @@
 
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import ResumeReport from "@/components/pdf/ResumeReport";
-import { useEffect, useState } from "react";
 import { Download, Loader2 } from "lucide-react";
 
-export default function ResumeResultPage() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    try {
-      const result = localStorage.getItem("resumeAnalysis");
-
-      if (!result) return;
-
-      const parsed = JSON.parse(result);
-
-      // IF SAVED AS { success:true, analysis:{} }
-      if (parsed.analysis) {
-        setData(parsed.analysis);
-      } else {
-        setData(parsed);
-      }
-
-      localStorage.removeItem("resumeAnalysis");
-    } catch (error) {
-      console.error("Resume Result Error:", error);
-    }
-  }, []);
+export default function ResumeResul({ resumeAnalysis }) {
+  const data = resumeAnalysis?.aiAnalysis;
 
   if (!data) {
     return (
-      <div className="flex items-center justify-center min-h-[60vh]">
+      <div className="flex min-h-[60vh] items-center justify-center">
         <h2 className="text-xl font-semibold text-gray-500">
           No analysis found
         </h2>
@@ -44,30 +22,30 @@ export default function ResumeResultPage() {
       {/* Download Link */}
 
       <div className="w-full flex justify-end">
-      <PDFDownloadLink
-        document={<ResumeReport data={data} />}
-        fileName="resume-analysis-report.pdf"
-      >
-        {({ loading }) => (
-          <button className="group relative overflow-hidden rounded-xl bg-linear-to-r from-violet-600 via-purple-600 to-indigo-600 px-6 py-3 font-semibold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-violet-500/40 cursor-pointer">
-            <span className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full " />
+        <PDFDownloadLink
+          document={<ResumeReport data={data} />}
+          fileName="resume-analysis-report.pdf"
+        >
+          {({ loading }) => (
+            <button className="group relative overflow-hidden rounded-xl bg-linear-to-r from-violet-600 via-purple-600 to-indigo-600 px-6 py-3 font-semibold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-violet-500/40 cursor-pointer">
+              <span className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full " />
 
-            <span className="relative flex items-center gap-2">
-              {loading ? (
-                <>
-                  <Loader2 className="h-5 w-5 animate-spin" />
-                  Generating PDF...
-                </>
-              ) : (
-                <>
-                  <Download className="h-5 w-5 transition-transform duration-300 group-hover:translate-y-0.5" />
-                  Download ATS Report
-                </>
-              )}
-            </span>
-          </button>
-        )}
-      </PDFDownloadLink>
+              <span className="relative flex items-center gap-2">
+                {loading ? (
+                  <>
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                    Generating PDF...
+                  </>
+                ) : (
+                  <>
+                    <Download className="h-5 w-5 transition-transform duration-300 group-hover:translate-y-0.5" />
+                    Download ATS Report
+                  </>
+                )}
+              </span>
+            </button>
+          )}
+        </PDFDownloadLink>
       </div>
 
       {/* Header */}

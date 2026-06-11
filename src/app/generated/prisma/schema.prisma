@@ -34,17 +34,9 @@ model User {
 model ResumeAnalysis {
   id String @id @default(cuid())
 
-  atsScore        Int
-  matchPercentage Int
+  aiAnalysis Json?
 
-  resumeQuality        Int
-  recruiterReadability Int
-
-  missingSkills   String[]
-  missingKeywords String[]
-
-  finalVerdict String?
-
+  // File Metadata
   fileUrl  String?
   fileName String?
   fileSize Int?
@@ -52,6 +44,7 @@ model ResumeAnalysis {
 
   createdAt DateTime @default(now())
 
+  // User Relation
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 

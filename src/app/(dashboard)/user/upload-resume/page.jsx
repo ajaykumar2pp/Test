@@ -38,13 +38,9 @@ import {
 import { useRouter } from "next/navigation";
 
 const validationSchema = Yup.object({
-  companyName: Yup.string()
-    .trim()
-    .required("Company name is required"),
+  companyName: Yup.string().trim().required("Company name is required"),
 
-  jobTitle: Yup.string()
-    .trim()
-    .required("Job title is required"),
+  jobTitle: Yup.string().trim().required("Job title is required"),
 
   jobDescription: Yup.string()
     .trim()
@@ -53,29 +49,21 @@ const validationSchema = Yup.object({
 
   resume: Yup.mixed()
     .required("Resume is required")
-    .test(
-      "fileFormat",
-      "Only PDF and DOCX files are allowed",
-      (file) => {
-        if (!file) return false;
+    .test("fileFormat", "Only PDF and DOCX files are allowed", (file) => {
+      if (!file) return false;
 
-        const allowedTypes = [
-          "application/pdf",
-          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        ];
+      const allowedTypes = [
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      ];
 
-        return allowedTypes.includes(file.type);
-      }
-    )
-    .test(
-      "fileSize",
-      "File size must be less than 10 MB",
-      (file) => {
-        if (!file) return false;
+      return allowedTypes.includes(file.type);
+    })
+    .test("fileSize", "File size must be less than 10 MB", (file) => {
+      if (!file) return false;
 
-        return file.size <= 10 * 1024 * 1024;
-      }
-    ),
+      return file.size <= 10 * 1024 * 1024;
+    }),
 });
 
 const initialValues = {
@@ -86,8 +74,7 @@ const initialValues = {
 };
 
 export default function ResumeAnalyzeForm() {
-  const [selectedFile, setSelectedFile] =
-    useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const router = useRouter();
 
@@ -95,117 +82,77 @@ export default function ResumeAnalyzeForm() {
   const { data: session } = useSession();
 
   // GENDER THEME
-  const isMale =
-    session?.user?.gender === "Male";
+  const isMale = session?.user?.gender === "Male";
 
   const theme = isMale
     ? {
-        header:
-          "from-blue-50 via-white to-cyan-50",
+        header: "from-blue-50 via-white to-cyan-50",
 
-        focus:
-          "focus-visible:ring-blue-500",
+        focus: "focus-visible:ring-blue-500",
 
-        uploadBorder:
-          "hover:border-blue-500",
+        uploadBorder: "hover:border-blue-500",
 
-        uploadBg:
-          "hover:bg-blue-50/50",
+        uploadBg: "hover:bg-blue-50/50",
 
-        gradient:
-          "from-blue-500/5 to-cyan-500/5",
+        gradient: "from-blue-500/5 to-cyan-500/5",
 
-        icon:
-          "text-blue-600",
+        icon: "text-blue-600",
 
-        fileBg:
-          "bg-blue-100",
+        fileBg: "bg-blue-100",
 
         button:
           "from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600",
 
-        buttonText:
-          "text-blue-600",
+        buttonText: "text-blue-600",
       }
     : {
-        header:
-          "from-pink-50 via-white to-fuchsia-50",
+        header: "from-pink-50 via-white to-fuchsia-50",
 
-        focus:
-          "focus-visible:ring-pink-500",
+        focus: "focus-visible:ring-pink-500",
 
-        uploadBorder:
-          "hover:border-pink-500",
+        uploadBorder: "hover:border-pink-500",
 
-        uploadBg:
-          "hover:bg-pink-50/50",
+        uploadBg: "hover:bg-pink-50/50",
 
-        gradient:
-          "from-pink-500/5 to-fuchsia-500/5",
+        gradient: "from-pink-500/5 to-fuchsia-500/5",
 
-        icon:
-          "text-pink-600",
+        icon: "text-pink-600",
 
-        fileBg:
-          "bg-pink-100",
+        fileBg: "bg-pink-100",
 
         button:
           "from-pink-500 to-fuchsia-500 hover:from-pink-600 hover:to-fuchsia-600",
 
-        buttonText:
-          "text-pink-600",
+        buttonText: "text-pink-600",
       };
 
-  const handleSubmit = async (
-    values,
-    { setSubmitting, resetForm }
-  ) => {
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       const formData = new FormData();
 
-      formData.append(
-        "companyName",
-        values.companyName
-      );
+      formData.append("companyName", values.companyName);
 
-      formData.append(
-        "jobTitle",
-        values.jobTitle
-      );
+      formData.append("jobTitle", values.jobTitle);
 
-      formData.append(
-        "jobDescription",
-        values.jobDescription
-      );
+      formData.append("jobDescription", values.jobDescription);
 
-      formData.append(
-        "resume",
-        values.resume
-      );
+      formData.append("resume", values.resume);
 
-      const response = await fetch(
-        "/api/extract-resume",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const response = await fetch("/api/extract-resume", {
+        method: "POST",
+        body: formData,
+      });
 
-      const data =
-        await response.json();
+      const data = await response.json();
+      console.log("API Response:", data);
 
-      localStorage.setItem(
-        "resumeAnalysis",
-        JSON.stringify(data.analysis)
-      );
+      // localStorage.setItem("resumeAnalysis", JSON.stringify(data.analysis));
 
       resetForm();
 
       setSelectedFile(null);
 
-      router.push(
-        "/user/resume-result"
-      );
+      router.push(`/user/resume-result/${data.id}`);
     } catch (error) {
       console.error(error);
     } finally {
@@ -229,35 +176,23 @@ export default function ResumeAnalyzeForm() {
           </CardTitle>
 
           <CardDescription className="text-base">
-            Compare your resume against a
-            job description and get ATS
-            insights, keyword matches,
-            missing skills, and improvement
-            suggestions.
+            Compare your resume against a job description and get ATS insights,
+            keyword matches, missing skills, and improvement suggestions.
           </CardDescription>
         </CardHeader>
 
         {/* Content */}
         <CardContent className="p-6 md:p-8">
           <Formik
-            initialValues={
-              initialValues
-            }
-            validationSchema={
-              validationSchema
-            }
+            initialValues={initialValues}
+            validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
-            {({
-              isSubmitting,
-              setFieldValue,
-            }) => (
+            {({ isSubmitting, setFieldValue }) => (
               <Form className="space-y-6">
                 {/* Company */}
                 <div>
-                  <Label className="mb-2 block">
-                    Company Name
-                  </Label>
+                  <Label className="mb-2 block">Company Name<span className="text-rose-500">*</span></Label>
 
                   <div className="relative">
                     <Building2
@@ -288,9 +223,7 @@ export default function ResumeAnalyzeForm() {
 
                 {/* Job Title */}
                 <div>
-                  <Label className="mb-2 block">
-                    Job Title
-                  </Label>
+                  <Label className="mb-2 block">Job Title<span className="text-rose-500">*</span></Label>
 
                   <div className="relative">
                     <Briefcase className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
@@ -316,9 +249,7 @@ export default function ResumeAnalyzeForm() {
 
                 {/* Description */}
                 <div>
-                  <Label className="mb-2 block">
-                    Job Description
-                  </Label>
+                  <Label className="mb-2 block">Job Description<span className="text-rose-500">*</span></Label>
 
                   <div className="relative">
                     <FileText className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
@@ -346,9 +277,7 @@ export default function ResumeAnalyzeForm() {
 
                 {/* Upload */}
                 <div>
-                  <Label className="mb-2 block">
-                    Upload Resume
-                  </Label>
+                  <Label className="mb-2 block">Upload Resume<span className="text-rose-500">*</span></Label>
 
                   <label
                     className={`
@@ -386,13 +315,10 @@ export default function ResumeAnalyzeForm() {
                         `}
                       />
 
-                      <p className="font-semibold">
-                        Click to Upload Resume
-                      </p>
+                      <p className="font-semibold">Click to Upload Resume</p>
 
                       <p className="mt-2 text-sm text-muted-foreground">
-                        PDF or DOCX • Maximum
-                        10MB
+                        PDF or DOCX • Maximum 10MB
                       </p>
                     </div>
 
@@ -401,19 +327,13 @@ export default function ResumeAnalyzeForm() {
                       hidden
                       accept=".pdf,.doc,.docx"
                       onChange={(e) => {
-                        const file =
-                          e.target.files?.[0];
+                        const file = e.target.files?.[0];
 
                         if (!file) return;
 
-                        setFieldValue(
-                          "resume",
-                          file
-                        );
+                        setFieldValue("resume", file);
 
-                        setSelectedFile(
-                          file
-                        );
+                        setSelectedFile(file);
                       }}
                     />
                   </label>
@@ -449,12 +369,7 @@ export default function ResumeAnalyzeForm() {
                           </p>
 
                           <p className="text-xs text-muted-foreground">
-                            {(
-                              selectedFile.size /
-                              1024 /
-                              1024
-                            ).toFixed(2)}{" "}
-                            MB
+                            {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
                           </p>
                         </div>
                       </div>
@@ -464,11 +379,7 @@ export default function ResumeAnalyzeForm() {
                         size="icon"
                         variant="ghost"
                         className="cursor-pointer"
-                        onClick={() =>
-                          setSelectedFile(
-                            null
-                          )
-                        }
+                        onClick={() => setSelectedFile(null)}
                       >
                         <X className="h-4 w-4" />
                       </Button>

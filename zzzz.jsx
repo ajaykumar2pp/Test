@@ -34,7 +34,47 @@ model User {
 model ResumeAnalysis {
   id String @id @default(cuid())
 
-  aiAnalysis Json?
+  atsScore        Int
+  matchPercentage Int
+
+  resumeQuality        Int
+  recruiterReadability Int
+
+  resumeSummary String?
+
+  missingSkills   String[]
+  missingKeywords String[]
+
+  finalVerdict String?
+
+  // Skill Analysis
+  matchedSkills      Json?
+  recommendedSkills  String[]
+  skillGapPercentage Int?
+
+  // Section Analysis
+  sectionWiseAnalysis Json?
+
+  // Keyword Analysis
+  priorityKeywords String[]
+  atsImpactLevel   String?
+
+  // Resume Insights
+  resumeStrengths        String[]
+  resumeWeaknesses       String[]
+  improvementSuggestions String[]
+
+  // Career Coach
+  overallAdvice           String?
+  recommendedLearningPath String[]
+  recommendedProjects     String[]
+  nextCareerSteps         String[]
+
+  // Interview Questions
+  technicalQuestions  String[]
+  projectQuestions    String[]
+  behavioralQuestions String[]
+  hrQuestions         String[]
 
   // File Metadata
   fileUrl  String?

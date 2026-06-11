@@ -2259,28 +2259,15 @@ export namespace Prisma {
   }
 
   export type ResumeAnalysisAvgAggregateOutputType = {
-    atsScore: number | null
-    matchPercentage: number | null
-    resumeQuality: number | null
-    recruiterReadability: number | null
     fileSize: number | null
   }
 
   export type ResumeAnalysisSumAggregateOutputType = {
-    atsScore: number | null
-    matchPercentage: number | null
-    resumeQuality: number | null
-    recruiterReadability: number | null
     fileSize: number | null
   }
 
   export type ResumeAnalysisMinAggregateOutputType = {
     id: string | null
-    atsScore: number | null
-    matchPercentage: number | null
-    resumeQuality: number | null
-    recruiterReadability: number | null
-    finalVerdict: string | null
     fileUrl: string | null
     fileName: string | null
     fileSize: number | null
@@ -2291,11 +2278,6 @@ export namespace Prisma {
 
   export type ResumeAnalysisMaxAggregateOutputType = {
     id: string | null
-    atsScore: number | null
-    matchPercentage: number | null
-    resumeQuality: number | null
-    recruiterReadability: number | null
-    finalVerdict: string | null
     fileUrl: string | null
     fileName: string | null
     fileSize: number | null
@@ -2306,13 +2288,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisCountAggregateOutputType = {
     id: number
-    atsScore: number
-    matchPercentage: number
-    resumeQuality: number
-    recruiterReadability: number
-    missingSkills: number
-    missingKeywords: number
-    finalVerdict: number
+    aiAnalysis: number
     fileUrl: number
     fileName: number
     fileSize: number
@@ -2324,28 +2300,15 @@ export namespace Prisma {
 
 
   export type ResumeAnalysisAvgAggregateInputType = {
-    atsScore?: true
-    matchPercentage?: true
-    resumeQuality?: true
-    recruiterReadability?: true
     fileSize?: true
   }
 
   export type ResumeAnalysisSumAggregateInputType = {
-    atsScore?: true
-    matchPercentage?: true
-    resumeQuality?: true
-    recruiterReadability?: true
     fileSize?: true
   }
 
   export type ResumeAnalysisMinAggregateInputType = {
     id?: true
-    atsScore?: true
-    matchPercentage?: true
-    resumeQuality?: true
-    recruiterReadability?: true
-    finalVerdict?: true
     fileUrl?: true
     fileName?: true
     fileSize?: true
@@ -2356,11 +2319,6 @@ export namespace Prisma {
 
   export type ResumeAnalysisMaxAggregateInputType = {
     id?: true
-    atsScore?: true
-    matchPercentage?: true
-    resumeQuality?: true
-    recruiterReadability?: true
-    finalVerdict?: true
     fileUrl?: true
     fileName?: true
     fileSize?: true
@@ -2371,13 +2329,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisCountAggregateInputType = {
     id?: true
-    atsScore?: true
-    matchPercentage?: true
-    resumeQuality?: true
-    recruiterReadability?: true
-    missingSkills?: true
-    missingKeywords?: true
-    finalVerdict?: true
+    aiAnalysis?: true
     fileUrl?: true
     fileName?: true
     fileSize?: true
@@ -2475,13 +2427,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisGroupByOutputType = {
     id: string
-    atsScore: number
-    matchPercentage: number
-    resumeQuality: number
-    recruiterReadability: number
-    missingSkills: string[]
-    missingKeywords: string[]
-    finalVerdict: string | null
+    aiAnalysis: JsonValue | null
     fileUrl: string | null
     fileName: string | null
     fileSize: number | null
@@ -2511,13 +2457,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    atsScore?: boolean
-    matchPercentage?: boolean
-    resumeQuality?: boolean
-    recruiterReadability?: boolean
-    missingSkills?: boolean
-    missingKeywords?: boolean
-    finalVerdict?: boolean
+    aiAnalysis?: boolean
     fileUrl?: boolean
     fileName?: boolean
     fileSize?: boolean
@@ -2529,13 +2469,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    atsScore?: boolean
-    matchPercentage?: boolean
-    resumeQuality?: boolean
-    recruiterReadability?: boolean
-    missingSkills?: boolean
-    missingKeywords?: boolean
-    finalVerdict?: boolean
+    aiAnalysis?: boolean
     fileUrl?: boolean
     fileName?: boolean
     fileSize?: boolean
@@ -2547,13 +2481,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    atsScore?: boolean
-    matchPercentage?: boolean
-    resumeQuality?: boolean
-    recruiterReadability?: boolean
-    missingSkills?: boolean
-    missingKeywords?: boolean
-    finalVerdict?: boolean
+    aiAnalysis?: boolean
     fileUrl?: boolean
     fileName?: boolean
     fileSize?: boolean
@@ -2565,13 +2493,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisSelectScalar = {
     id?: boolean
-    atsScore?: boolean
-    matchPercentage?: boolean
-    resumeQuality?: boolean
-    recruiterReadability?: boolean
-    missingSkills?: boolean
-    missingKeywords?: boolean
-    finalVerdict?: boolean
+    aiAnalysis?: boolean
     fileUrl?: boolean
     fileName?: boolean
     fileSize?: boolean
@@ -2580,7 +2502,7 @@ export namespace Prisma {
     userId?: boolean
   }
 
-  export type ResumeAnalysisOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "atsScore" | "matchPercentage" | "resumeQuality" | "recruiterReadability" | "missingSkills" | "missingKeywords" | "finalVerdict" | "fileUrl" | "fileName" | "fileSize" | "fileType" | "createdAt" | "userId", ExtArgs["result"]["resumeAnalysis"]>
+  export type ResumeAnalysisOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "aiAnalysis" | "fileUrl" | "fileName" | "fileSize" | "fileType" | "createdAt" | "userId", ExtArgs["result"]["resumeAnalysis"]>
   export type ResumeAnalysisInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2598,13 +2520,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      atsScore: number
-      matchPercentage: number
-      resumeQuality: number
-      recruiterReadability: number
-      missingSkills: string[]
-      missingKeywords: string[]
-      finalVerdict: string | null
+      aiAnalysis: Prisma.JsonValue | null
       fileUrl: string | null
       fileName: string | null
       fileSize: number | null
@@ -3036,13 +2952,7 @@ export namespace Prisma {
    */
   interface ResumeAnalysisFieldRefs {
     readonly id: FieldRef<"ResumeAnalysis", 'String'>
-    readonly atsScore: FieldRef<"ResumeAnalysis", 'Int'>
-    readonly matchPercentage: FieldRef<"ResumeAnalysis", 'Int'>
-    readonly resumeQuality: FieldRef<"ResumeAnalysis", 'Int'>
-    readonly recruiterReadability: FieldRef<"ResumeAnalysis", 'Int'>
-    readonly missingSkills: FieldRef<"ResumeAnalysis", 'String[]'>
-    readonly missingKeywords: FieldRef<"ResumeAnalysis", 'String[]'>
-    readonly finalVerdict: FieldRef<"ResumeAnalysis", 'String'>
+    readonly aiAnalysis: FieldRef<"ResumeAnalysis", 'Json'>
     readonly fileUrl: FieldRef<"ResumeAnalysis", 'String'>
     readonly fileName: FieldRef<"ResumeAnalysis", 'String'>
     readonly fileSize: FieldRef<"ResumeAnalysis", 'Int'>
@@ -4595,13 +4505,7 @@ export namespace Prisma {
 
   export const ResumeAnalysisScalarFieldEnum: {
     id: 'id',
-    atsScore: 'atsScore',
-    matchPercentage: 'matchPercentage',
-    resumeQuality: 'resumeQuality',
-    recruiterReadability: 'recruiterReadability',
-    missingSkills: 'missingSkills',
-    missingKeywords: 'missingKeywords',
-    finalVerdict: 'finalVerdict',
+    aiAnalysis: 'aiAnalysis',
     fileUrl: 'fileUrl',
     fileName: 'fileName',
     fileSize: 'fileSize',
@@ -4632,12 +4536,29 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   export const NullsOrder: {
@@ -4692,6 +4613,20 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -4804,13 +4739,7 @@ export namespace Prisma {
     OR?: ResumeAnalysisWhereInput[]
     NOT?: ResumeAnalysisWhereInput | ResumeAnalysisWhereInput[]
     id?: StringFilter<"ResumeAnalysis"> | string
-    atsScore?: IntFilter<"ResumeAnalysis"> | number
-    matchPercentage?: IntFilter<"ResumeAnalysis"> | number
-    resumeQuality?: IntFilter<"ResumeAnalysis"> | number
-    recruiterReadability?: IntFilter<"ResumeAnalysis"> | number
-    missingSkills?: StringNullableListFilter<"ResumeAnalysis">
-    missingKeywords?: StringNullableListFilter<"ResumeAnalysis">
-    finalVerdict?: StringNullableFilter<"ResumeAnalysis"> | string | null
+    aiAnalysis?: JsonNullableFilter<"ResumeAnalysis">
     fileUrl?: StringNullableFilter<"ResumeAnalysis"> | string | null
     fileName?: StringNullableFilter<"ResumeAnalysis"> | string | null
     fileSize?: IntNullableFilter<"ResumeAnalysis"> | number | null
@@ -4822,13 +4751,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisOrderByWithRelationInput = {
     id?: SortOrder
-    atsScore?: SortOrder
-    matchPercentage?: SortOrder
-    resumeQuality?: SortOrder
-    recruiterReadability?: SortOrder
-    missingSkills?: SortOrder
-    missingKeywords?: SortOrder
-    finalVerdict?: SortOrderInput | SortOrder
+    aiAnalysis?: SortOrderInput | SortOrder
     fileUrl?: SortOrderInput | SortOrder
     fileName?: SortOrderInput | SortOrder
     fileSize?: SortOrderInput | SortOrder
@@ -4843,13 +4766,7 @@ export namespace Prisma {
     AND?: ResumeAnalysisWhereInput | ResumeAnalysisWhereInput[]
     OR?: ResumeAnalysisWhereInput[]
     NOT?: ResumeAnalysisWhereInput | ResumeAnalysisWhereInput[]
-    atsScore?: IntFilter<"ResumeAnalysis"> | number
-    matchPercentage?: IntFilter<"ResumeAnalysis"> | number
-    resumeQuality?: IntFilter<"ResumeAnalysis"> | number
-    recruiterReadability?: IntFilter<"ResumeAnalysis"> | number
-    missingSkills?: StringNullableListFilter<"ResumeAnalysis">
-    missingKeywords?: StringNullableListFilter<"ResumeAnalysis">
-    finalVerdict?: StringNullableFilter<"ResumeAnalysis"> | string | null
+    aiAnalysis?: JsonNullableFilter<"ResumeAnalysis">
     fileUrl?: StringNullableFilter<"ResumeAnalysis"> | string | null
     fileName?: StringNullableFilter<"ResumeAnalysis"> | string | null
     fileSize?: IntNullableFilter<"ResumeAnalysis"> | number | null
@@ -4861,13 +4778,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisOrderByWithAggregationInput = {
     id?: SortOrder
-    atsScore?: SortOrder
-    matchPercentage?: SortOrder
-    resumeQuality?: SortOrder
-    recruiterReadability?: SortOrder
-    missingSkills?: SortOrder
-    missingKeywords?: SortOrder
-    finalVerdict?: SortOrderInput | SortOrder
+    aiAnalysis?: SortOrderInput | SortOrder
     fileUrl?: SortOrderInput | SortOrder
     fileName?: SortOrderInput | SortOrder
     fileSize?: SortOrderInput | SortOrder
@@ -4886,13 +4797,7 @@ export namespace Prisma {
     OR?: ResumeAnalysisScalarWhereWithAggregatesInput[]
     NOT?: ResumeAnalysisScalarWhereWithAggregatesInput | ResumeAnalysisScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"ResumeAnalysis"> | string
-    atsScore?: IntWithAggregatesFilter<"ResumeAnalysis"> | number
-    matchPercentage?: IntWithAggregatesFilter<"ResumeAnalysis"> | number
-    resumeQuality?: IntWithAggregatesFilter<"ResumeAnalysis"> | number
-    recruiterReadability?: IntWithAggregatesFilter<"ResumeAnalysis"> | number
-    missingSkills?: StringNullableListFilter<"ResumeAnalysis">
-    missingKeywords?: StringNullableListFilter<"ResumeAnalysis">
-    finalVerdict?: StringNullableWithAggregatesFilter<"ResumeAnalysis"> | string | null
+    aiAnalysis?: JsonNullableWithAggregatesFilter<"ResumeAnalysis">
     fileUrl?: StringNullableWithAggregatesFilter<"ResumeAnalysis"> | string | null
     fileName?: StringNullableWithAggregatesFilter<"ResumeAnalysis"> | string | null
     fileSize?: IntNullableWithAggregatesFilter<"ResumeAnalysis"> | number | null
@@ -5045,13 +4950,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisCreateInput = {
     id?: string
-    atsScore: number
-    matchPercentage: number
-    resumeQuality: number
-    recruiterReadability: number
-    missingSkills?: ResumeAnalysisCreatemissingSkillsInput | string[]
-    missingKeywords?: ResumeAnalysisCreatemissingKeywordsInput | string[]
-    finalVerdict?: string | null
+    aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
     fileUrl?: string | null
     fileName?: string | null
     fileSize?: number | null
@@ -5062,13 +4961,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisUncheckedCreateInput = {
     id?: string
-    atsScore: number
-    matchPercentage: number
-    resumeQuality: number
-    recruiterReadability: number
-    missingSkills?: ResumeAnalysisCreatemissingSkillsInput | string[]
-    missingKeywords?: ResumeAnalysisCreatemissingKeywordsInput | string[]
-    finalVerdict?: string | null
+    aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
     fileUrl?: string | null
     fileName?: string | null
     fileSize?: number | null
@@ -5079,13 +4972,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    atsScore?: IntFieldUpdateOperationsInput | number
-    matchPercentage?: IntFieldUpdateOperationsInput | number
-    resumeQuality?: IntFieldUpdateOperationsInput | number
-    recruiterReadability?: IntFieldUpdateOperationsInput | number
-    missingSkills?: ResumeAnalysisUpdatemissingSkillsInput | string[]
-    missingKeywords?: ResumeAnalysisUpdatemissingKeywordsInput | string[]
-    finalVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileName?: NullableStringFieldUpdateOperationsInput | string | null
     fileSize?: NullableIntFieldUpdateOperationsInput | number | null
@@ -5096,13 +4983,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    atsScore?: IntFieldUpdateOperationsInput | number
-    matchPercentage?: IntFieldUpdateOperationsInput | number
-    resumeQuality?: IntFieldUpdateOperationsInput | number
-    recruiterReadability?: IntFieldUpdateOperationsInput | number
-    missingSkills?: ResumeAnalysisUpdatemissingSkillsInput | string[]
-    missingKeywords?: ResumeAnalysisUpdatemissingKeywordsInput | string[]
-    finalVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileName?: NullableStringFieldUpdateOperationsInput | string | null
     fileSize?: NullableIntFieldUpdateOperationsInput | number | null
@@ -5113,13 +4994,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisCreateManyInput = {
     id?: string
-    atsScore: number
-    matchPercentage: number
-    resumeQuality: number
-    recruiterReadability: number
-    missingSkills?: ResumeAnalysisCreatemissingSkillsInput | string[]
-    missingKeywords?: ResumeAnalysisCreatemissingKeywordsInput | string[]
-    finalVerdict?: string | null
+    aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
     fileUrl?: string | null
     fileName?: string | null
     fileSize?: number | null
@@ -5130,13 +5005,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    atsScore?: IntFieldUpdateOperationsInput | number
-    matchPercentage?: IntFieldUpdateOperationsInput | number
-    resumeQuality?: IntFieldUpdateOperationsInput | number
-    recruiterReadability?: IntFieldUpdateOperationsInput | number
-    missingSkills?: ResumeAnalysisUpdatemissingSkillsInput | string[]
-    missingKeywords?: ResumeAnalysisUpdatemissingKeywordsInput | string[]
-    finalVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileName?: NullableStringFieldUpdateOperationsInput | string | null
     fileSize?: NullableIntFieldUpdateOperationsInput | number | null
@@ -5146,13 +5015,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    atsScore?: IntFieldUpdateOperationsInput | number
-    matchPercentage?: IntFieldUpdateOperationsInput | number
-    resumeQuality?: IntFieldUpdateOperationsInput | number
-    recruiterReadability?: IntFieldUpdateOperationsInput | number
-    missingSkills?: ResumeAnalysisUpdatemissingSkillsInput | string[]
-    missingKeywords?: ResumeAnalysisUpdatemissingKeywordsInput | string[]
-    finalVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileName?: NullableStringFieldUpdateOperationsInput | string | null
     fileSize?: NullableIntFieldUpdateOperationsInput | number | null
@@ -5343,24 +5206,28 @@ export namespace Prisma {
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
-  export type StringNullableListFilter<$PrismaModel = never> = {
-    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    has?: string | StringFieldRefInput<$PrismaModel> | null
-    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
-    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -5401,13 +5268,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisCountOrderByAggregateInput = {
     id?: SortOrder
-    atsScore?: SortOrder
-    matchPercentage?: SortOrder
-    resumeQuality?: SortOrder
-    recruiterReadability?: SortOrder
-    missingSkills?: SortOrder
-    missingKeywords?: SortOrder
-    finalVerdict?: SortOrder
+    aiAnalysis?: SortOrder
     fileUrl?: SortOrder
     fileName?: SortOrder
     fileSize?: SortOrder
@@ -5417,20 +5278,11 @@ export namespace Prisma {
   }
 
   export type ResumeAnalysisAvgOrderByAggregateInput = {
-    atsScore?: SortOrder
-    matchPercentage?: SortOrder
-    resumeQuality?: SortOrder
-    recruiterReadability?: SortOrder
     fileSize?: SortOrder
   }
 
   export type ResumeAnalysisMaxOrderByAggregateInput = {
     id?: SortOrder
-    atsScore?: SortOrder
-    matchPercentage?: SortOrder
-    resumeQuality?: SortOrder
-    recruiterReadability?: SortOrder
-    finalVerdict?: SortOrder
     fileUrl?: SortOrder
     fileName?: SortOrder
     fileSize?: SortOrder
@@ -5441,11 +5293,6 @@ export namespace Prisma {
 
   export type ResumeAnalysisMinOrderByAggregateInput = {
     id?: SortOrder
-    atsScore?: SortOrder
-    matchPercentage?: SortOrder
-    resumeQuality?: SortOrder
-    recruiterReadability?: SortOrder
-    finalVerdict?: SortOrder
     fileUrl?: SortOrder
     fileName?: SortOrder
     fileSize?: SortOrder
@@ -5455,27 +5302,33 @@ export namespace Prisma {
   }
 
   export type ResumeAnalysisSumOrderByAggregateInput = {
-    atsScore?: SortOrder
-    matchPercentage?: SortOrder
-    resumeQuality?: SortOrder
-    recruiterReadability?: SortOrder
     fileSize?: SortOrder
   }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
 
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -5512,6 +5365,17 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type FeedbackCountOrderByAggregateInput = {
     id?: SortOrder
     rating?: SortOrder
@@ -5542,6 +5406,22 @@ export namespace Prisma {
 
   export type FeedbackSumOrderByAggregateInput = {
     rating?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type ResumeAnalysisCreateNestedManyWithoutUserInput = {
@@ -5640,36 +5520,10 @@ export namespace Prisma {
     deleteMany?: FeedbackScalarWhereInput | FeedbackScalarWhereInput[]
   }
 
-  export type ResumeAnalysisCreatemissingSkillsInput = {
-    set: string[]
-  }
-
-  export type ResumeAnalysisCreatemissingKeywordsInput = {
-    set: string[]
-  }
-
   export type UserCreateNestedOneWithoutResumeAnalysesInput = {
     create?: XOR<UserCreateWithoutResumeAnalysesInput, UserUncheckedCreateWithoutResumeAnalysesInput>
     connectOrCreate?: UserCreateOrConnectWithoutResumeAnalysesInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type ResumeAnalysisUpdatemissingSkillsInput = {
-    set?: string[]
-    push?: string | string[]
-  }
-
-  export type ResumeAnalysisUpdatemissingKeywordsInput = {
-    set?: string[]
-    push?: string | string[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -5696,6 +5550,14 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutFeedbacksInput, UserUncheckedCreateWithoutFeedbacksInput>
     connectOrCreate?: UserCreateOrConnectWithoutFeedbacksInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type UserUpdateOneRequiredWithoutFeedbacksNestedInput = {
@@ -5814,32 +5676,28 @@ export namespace Prisma {
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -5886,15 +5744,36 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type ResumeAnalysisCreateWithoutUserInput = {
     id?: string
-    atsScore: number
-    matchPercentage: number
-    resumeQuality: number
-    recruiterReadability: number
-    missingSkills?: ResumeAnalysisCreatemissingSkillsInput | string[]
-    missingKeywords?: ResumeAnalysisCreatemissingKeywordsInput | string[]
-    finalVerdict?: string | null
+    aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
     fileUrl?: string | null
     fileName?: string | null
     fileSize?: number | null
@@ -5904,13 +5783,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisUncheckedCreateWithoutUserInput = {
     id?: string
-    atsScore: number
-    matchPercentage: number
-    resumeQuality: number
-    recruiterReadability: number
-    missingSkills?: ResumeAnalysisCreatemissingSkillsInput | string[]
-    missingKeywords?: ResumeAnalysisCreatemissingKeywordsInput | string[]
-    finalVerdict?: string | null
+    aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
     fileUrl?: string | null
     fileName?: string | null
     fileSize?: number | null
@@ -5973,13 +5846,7 @@ export namespace Prisma {
     OR?: ResumeAnalysisScalarWhereInput[]
     NOT?: ResumeAnalysisScalarWhereInput | ResumeAnalysisScalarWhereInput[]
     id?: StringFilter<"ResumeAnalysis"> | string
-    atsScore?: IntFilter<"ResumeAnalysis"> | number
-    matchPercentage?: IntFilter<"ResumeAnalysis"> | number
-    resumeQuality?: IntFilter<"ResumeAnalysis"> | number
-    recruiterReadability?: IntFilter<"ResumeAnalysis"> | number
-    missingSkills?: StringNullableListFilter<"ResumeAnalysis">
-    missingKeywords?: StringNullableListFilter<"ResumeAnalysis">
-    finalVerdict?: StringNullableFilter<"ResumeAnalysis"> | string | null
+    aiAnalysis?: JsonNullableFilter<"ResumeAnalysis">
     fileUrl?: StringNullableFilter<"ResumeAnalysis"> | string | null
     fileName?: StringNullableFilter<"ResumeAnalysis"> | string | null
     fileSize?: IntNullableFilter<"ResumeAnalysis"> | number | null
@@ -6145,13 +6012,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisCreateManyUserInput = {
     id?: string
-    atsScore: number
-    matchPercentage: number
-    resumeQuality: number
-    recruiterReadability: number
-    missingSkills?: ResumeAnalysisCreatemissingSkillsInput | string[]
-    missingKeywords?: ResumeAnalysisCreatemissingKeywordsInput | string[]
-    finalVerdict?: string | null
+    aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
     fileUrl?: string | null
     fileName?: string | null
     fileSize?: number | null
@@ -6168,13 +6029,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    atsScore?: IntFieldUpdateOperationsInput | number
-    matchPercentage?: IntFieldUpdateOperationsInput | number
-    resumeQuality?: IntFieldUpdateOperationsInput | number
-    recruiterReadability?: IntFieldUpdateOperationsInput | number
-    missingSkills?: ResumeAnalysisUpdatemissingSkillsInput | string[]
-    missingKeywords?: ResumeAnalysisUpdatemissingKeywordsInput | string[]
-    finalVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileName?: NullableStringFieldUpdateOperationsInput | string | null
     fileSize?: NullableIntFieldUpdateOperationsInput | number | null
@@ -6184,13 +6039,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    atsScore?: IntFieldUpdateOperationsInput | number
-    matchPercentage?: IntFieldUpdateOperationsInput | number
-    resumeQuality?: IntFieldUpdateOperationsInput | number
-    recruiterReadability?: IntFieldUpdateOperationsInput | number
-    missingSkills?: ResumeAnalysisUpdatemissingSkillsInput | string[]
-    missingKeywords?: ResumeAnalysisUpdatemissingKeywordsInput | string[]
-    finalVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileName?: NullableStringFieldUpdateOperationsInput | string | null
     fileSize?: NullableIntFieldUpdateOperationsInput | number | null
@@ -6200,13 +6049,7 @@ export namespace Prisma {
 
   export type ResumeAnalysisUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    atsScore?: IntFieldUpdateOperationsInput | number
-    matchPercentage?: IntFieldUpdateOperationsInput | number
-    resumeQuality?: IntFieldUpdateOperationsInput | number
-    recruiterReadability?: IntFieldUpdateOperationsInput | number
-    missingSkills?: ResumeAnalysisUpdatemissingSkillsInput | string[]
-    missingKeywords?: ResumeAnalysisUpdatemissingKeywordsInput | string[]
-    finalVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileName?: NullableStringFieldUpdateOperationsInput | string | null
     fileSize?: NullableIntFieldUpdateOperationsInput | number | null
