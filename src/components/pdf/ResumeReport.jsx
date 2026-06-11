@@ -117,6 +117,8 @@ const styles = StyleSheet.create({
     color: "#059669",
     fontWeight: "bold",
   },
+
+
 });
 
 export default function ResumeReport({ data }) {

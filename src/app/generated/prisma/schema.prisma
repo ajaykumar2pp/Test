@@ -34,7 +34,12 @@ model User {
 model ResumeAnalysis {
   id String @id @default(cuid())
 
+  // AI Analysis Result
   aiAnalysis Json?
+
+  // Job Details
+  companyName String?
+  jobRole     String?
 
   // File Metadata
   fileUrl  String?

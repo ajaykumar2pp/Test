@@ -134,6 +134,8 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.ResumeAnalysisScalarFieldEnum = {
   id: 'id',
   aiAnalysis: 'aiAnalysis',
+  companyName: 'companyName',
+  jobRole: 'jobRole',
   fileUrl: 'fileUrl',
   fileName: 'fileName',
   fileSize: 'fileSize',

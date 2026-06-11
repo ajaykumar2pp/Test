@@ -3,8 +3,10 @@
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import ResumeReport from "@/components/pdf/ResumeReport";
 import { Download, Loader2 } from "lucide-react";
+import { Building2, Briefcase, Calendar, FileText } from "lucide-react";
+import { format } from "date-fns";
 
-export default function ResumeResul({ resumeAnalysis }) {
+export default function ResumeResult({ resumeAnalysis }) {
   const data = resumeAnalysis?.aiAnalysis;
 
   if (!data) {
@@ -18,9 +20,9 @@ export default function ResumeResul({ resumeAnalysis }) {
   }
 
   return (
-    <div className="max-w-7xl mx-auto p-6 space-y-6">
-      {/* Download Link */}
+    <div className="rounded-2xl border bg-white p-6 ">
 
+      {/* Download Link */}
       <div className="w-full flex justify-end">
         <PDFDownloadLink
           document={<ResumeReport data={data} />}
@@ -48,8 +50,95 @@ export default function ResumeResul({ resumeAnalysis }) {
         </PDFDownloadLink>
       </div>
 
+      {/* Company Name or Position */}
+      <div className="mt-5 rounded-2xl border bg-white p-6 shadow-sm">
+        <div className="mb-5">
+          <h2 className="text-lg font-semibold text-slate-900">
+            Resume Information
+          </h2>
+
+          <p className="text-sm text-slate-500">
+            Details used for this resume analysis
+          </p>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Company */}
+          <div className="rounded-xl border bg-slate-50 p-4">
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-100">
+              <Building2 className="h-5 w-5 text-indigo-600" />
+            </div>
+
+            <p className="uppercase text-xl font-semibold tracking-tight text-slate-900">
+              Company Name
+            </p>
+
+            <p
+              title={resumeAnalysis.companyName}
+              className="mt-1 line-clamp-2 font-medium text-slate-900"
+            >
+              {resumeAnalysis.companyName || "Not Provided"}
+            </p>
+          </div>
+
+          {/* Job Role */}
+          <div className="rounded-xl border bg-slate-50 p-4">
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-violet-100">
+              <Briefcase className="h-5 w-5 text-violet-600" />
+            </div>
+
+            <p className=" uppercase text-xl font-semibold tracking-tight text-slate-900">
+              Job Title
+            </p>
+
+            <p
+              title={resumeAnalysis.jobRole}
+              className="mt-1 line-clamp-2 font-medium text-slate-900"
+            >
+              {resumeAnalysis.jobRole || "Not Provided"}
+            </p>
+          </div>
+
+          {/* Resume */}
+          <div className="rounded-xl border bg-slate-50 p-4">
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100">
+              <FileText className="h-5 w-5 text-blue-600" />
+            </div>
+
+            <p className="uppercase text-xl font-semibold tracking-tight text-slate-900">
+              Resume Name
+            </p>
+
+            <p
+              title={resumeAnalysis.fileName}
+              className="mt-1 truncate font-medium text-slate-900"
+            >
+              {resumeAnalysis.fileName || "Unknown"}
+            </p>
+          </div>
+
+          {/* Date */}
+          <div className="rounded-xl border bg-slate-50 p-4">
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-100">
+              <Calendar className="h-5 w-5 text-emerald-600" />
+            </div>
+
+            <p className="uppercase text-xl font-semibold tracking-tight text-slate-900">
+              Analyzed On
+            </p>
+
+            <p className="mt-1 font-medium text-slate-900">
+              {format(
+                new Date(resumeAnalysis.createdAt),
+                "dd MMM yyyy, hh:mm a",
+              )}
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Header */}
-      <div className="bg-white border rounded-xl shadow-sm p-6">
+      <div className="bg-white border rounded-xl shadow-sm p-6 mt-5">
         <h1 className="text-3xl font-bold">ATS Score: {data.atsScore}/100</h1>
 
         <p className="mt-2 text-gray-600">
@@ -60,14 +149,14 @@ export default function ResumeResul({ resumeAnalysis }) {
       </div>
 
       {/* Resume Summary */}
-      <div className="bg-white border rounded-xl p-6">
+      <div className="bg-white border rounded-xl p-6 mt-5 ">
         <h2 className="text-xl font-semibold mb-3">Resume Summary</h2>
 
         <p className="text-gray-700">{data.resumeSummary}</p>
       </div>
 
       {/* Score Gauges */}
-      <div className="grid md:grid-cols-3 gap-4">
+      <div className="grid md:grid-cols-3 gap-4 mt-5">
         <div className="border rounded-xl p-5 bg-white">
           <h3 className="font-semibold">ATS Compatibility</h3>
           <p className="text-3xl font-bold mt-2">
@@ -91,7 +180,7 @@ export default function ResumeResul({ resumeAnalysis }) {
       </div>
 
       {/* Skills Analysis */}
-      <div className="bg-white border rounded-xl p-6">
+      <div className="bg-white border rounded-xl p-6 mt-5">
         <h2 className="text-xl font-semibold mb-4">Skill Match Analysis</h2>
 
         <div className="space-y-4">
@@ -116,7 +205,7 @@ export default function ResumeResul({ resumeAnalysis }) {
       </div>
 
       {/* Missing Skills */}
-      <div className="bg-white border rounded-xl p-6">
+      <div className="bg-white border rounded-xl p-6 mt-5">
         <h2 className="text-xl font-semibold text-red-600">Missing Skills</h2>
 
         <div className="flex flex-wrap gap-2 mt-4">
@@ -132,7 +221,7 @@ export default function ResumeResul({ resumeAnalysis }) {
       </div>
 
       {/* Recommended Skills */}
-      <div className="bg-white border rounded-xl p-6">
+      <div className="bg-white border rounded-xl p-6 mt-5">
         <h2 className="text-xl font-semibold text-blue-600">
           Recommended Skills
         </h2>
@@ -150,7 +239,7 @@ export default function ResumeResul({ resumeAnalysis }) {
       </div>
 
       {/* Resume Strengths */}
-      <div className="bg-white border rounded-xl p-6">
+      <div className="bg-white border rounded-xl p-6 mt-5">
         <h2 className="text-xl font-semibold text-green-600">
           Resume Strengths
         </h2>
@@ -163,7 +252,7 @@ export default function ResumeResul({ resumeAnalysis }) {
       </div>
 
       {/* Resume Weaknesses */}
-      <div className="bg-white border rounded-xl p-6">
+      <div className="bg-white border rounded-xl p-6 mt-5">
         <h2 className="text-xl font-semibold text-red-600">
           Resume Weaknesses
         </h2>
@@ -176,7 +265,7 @@ export default function ResumeResul({ resumeAnalysis }) {
       </div>
 
       {/* Missing Keywords */}
-      <div className="bg-white border rounded-xl p-6">
+      <div className="bg-white border rounded-xl p-6 mt-5">
         <h2 className="text-xl font-semibold">Missing Keywords</h2>
 
         <div className="flex flex-wrap gap-2 mt-4">
@@ -192,7 +281,7 @@ export default function ResumeResul({ resumeAnalysis }) {
       </div>
 
       {/* Improvements */}
-      <div className="bg-white border rounded-xl p-6">
+      <div className="bg-white border rounded-xl p-6 mt-5">
         <h2 className="text-xl font-semibold">Improvement Suggestions</h2>
 
         <ul className="list-disc ml-6 mt-4 space-y-2">
@@ -203,7 +292,7 @@ export default function ResumeResul({ resumeAnalysis }) {
       </div>
 
       {/* Career Coach */}
-      <div className="bg-white border rounded-xl p-6">
+      <div className="bg-white border rounded-xl p-6 mt-5">
         <h2 className="text-xl font-semibold">AI Career Coach</h2>
 
         <p className="mt-3 text-gray-700">{data.careerCoach?.overallAdvice}</p>
@@ -220,7 +309,7 @@ export default function ResumeResul({ resumeAnalysis }) {
       </div>
 
       {/* Interview Questions */}
-      <div className="bg-white border rounded-xl p-6">
+      <div className="bg-white border rounded-xl p-6 mt-5">
         <h2 className="text-xl font-semibold">Interview Questions</h2>
 
         <div className="mt-5">

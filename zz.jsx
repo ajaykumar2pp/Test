@@ -1,178 +1,264 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Star, Quote, Loader2 } from "lucide-react";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import ResumeReport from "@/components/pdf/ResumeReport";
+import { Download, Loader2 } from "lucide-react";
 import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
+  Building2,
+  Briefcase,
+  Calendar,
+  FileText,
+} from "lucide-react";
 import { format } from "date-fns";
 
-export default function Testimonials() {
-  const [feedbacks, setFeedbacks] = useState([]);
-  const [loading, setLoading] = useState(true);
+export default function ResumeResul({ resumeAnalysis }) {
+  const data = resumeAnalysis?.aiAnalysis;
 
-  useEffect(() => {
-    const fetchFeedbacks = async () => {
-      try {
-        setLoading(true);
-
-        const res = await fetch("/api/feedback/getFeedback");
-        const data = await res.json();
-
-        setFeedbacks(Array.isArray(data?.data) ? data.data : []);
-      } catch (error) {
-        console.error("Feedback error:", error);
-        setFeedbacks([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchFeedbacks();
-  }, []);
-
-  // ✅ LOADING STATE
-  if (loading) {
+  if (!data) {
     return (
-      <div className="flex justify-center py-20">
-        <Loader2 className="h-8 w-8 animate-spin text-indigo-600" />
-      </div>
-    );
-  }
-
-  // ✅ EMPTY STATE
-  if (!feedbacks.length) {
-    return (
-      <div className="text-center py-12 text-slate-500">
-        No testimonials available yet.
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <h2 className="text-xl font-semibold text-gray-500">
+          No analysis found
+        </h2>
       </div>
     );
   }
 
   return (
-    <section className="relative overflow-hidden bg-slate-50 py-24">
+    <div className="max-w-7xl mx-auto p-6 space-y-6">
+      {/* Download Link */}
 
-      {/* Background blur */}
-      <div className="absolute left-0 top-0 h-72 w-72 rounded-full bg-indigo-100 blur-3xl opacity-40" />
-      <div className="absolute right-0 bottom-0 h-72 w-72 rounded-full bg-indigo-100 blur-3xl opacity-40" />
+      <div className="w-full flex justify-end">
+        <PDFDownloadLink
+          document={<ResumeReport data={data} />}
+          fileName="resume-analysis-report.pdf"
+        >
+          {({ loading }) => (
+            <button className="group relative overflow-hidden rounded-xl bg-linear-to-r from-violet-600 via-purple-600 to-indigo-600 px-6 py-3 font-semibold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-violet-500/40 cursor-pointer">
+              <span className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full " />
 
-      <div className="container relative mx-auto px-4">
+              <span className="relative flex items-center gap-2">
+                {loading ? (
+                  <>
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                    Generating PDF...
+                  </>
+                ) : (
+                  <>
+                    <Download className="h-5 w-5 transition-transform duration-300 group-hover:translate-y-0.5" />
+                    Download ATS Report
+                  </>
+                )}
+              </span>
+            </button>
+          )}
+        </PDFDownloadLink>
+      </div>
 
-        {/* HEADER */}
-        <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center rounded-full border border-indigo-100 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-700">
-            Testimonials
-          </span>
+      {/* Header */}
+      <div className="bg-white border rounded-xl shadow-sm p-6">
+        <h1 className="text-3xl font-bold">ATS Score: {data.atsScore}/100</h1>
 
-          <h2 className="mt-6 text-4xl font-bold text-slate-900 md:text-5xl">
-            Loved by <span className="text-indigo-600">Job Seekers</span>
-          </h2>
+        <p className="mt-2 text-gray-600">
+          Match Percentage: {data.matchPercentage}%
+        </p>
 
-          <p className="mt-5 text-lg text-slate-600">
-            Thousands of professionals improved their resumes and got more interviews.
+        <p className="mt-4 text-gray-700">{data.finalVerdict}</p>
+      </div>
+
+      {/* Resume Summary */}
+      <div className="bg-white border rounded-xl p-6">
+        <h2 className="text-xl font-semibold mb-3">Resume Summary</h2>
+
+        <p className="text-gray-700">{data.resumeSummary}</p>
+      </div>
+
+      {/* Score Gauges */}
+      <div className="grid md:grid-cols-3 gap-4">
+        <div className="border rounded-xl p-5 bg-white">
+          <h3 className="font-semibold">ATS Compatibility</h3>
+          <p className="text-3xl font-bold mt-2">
+            {data.resumeScoreGauge?.atsCompatibility}%
           </p>
         </div>
 
-        {/* CAROUSEL */}
-        <Carousel
-          opts={{
-            align: "start",
-          }}
-          className="mt-16 w-full relative"
-        >
-          <CarouselContent className="-ml-4 items-stretch">
-
-            {feedbacks.map((item) => (
-              <CarouselItem
-                key={item.id}
-                className="pl-4 basis-full md:basis-1/2 lg:basis-1/3 shrink-0 flex"
-              >
-                {/* CARD */}
-                <div className="flex w-full h-[260px] flex-col justify-between rounded-3xl border bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
-
-                  {/* TOP */}
-                  <div>
-                    <div className="mb-5 flex justify-between">
-                      <Quote className="h-7 w-7 text-indigo-600 rotate-180" />
-
-                      <div className="flex gap-0.5">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <Star
-                            key={star}
-                            className={`h-4 w-4 ${
-                              star <= (item.rating || 0)
-                                ? "fill-yellow-400 text-yellow-400"
-                                : "text-gray-300"
-                            }`}
-                          />
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* MESSAGE (2 LINE ONLY) */}
-                    <p className="text-sm text-slate-600 italic leading-relaxed line-clamp-2 min-h-[40px]">
-                      "{item.message}"
-                    </p>
-                  </div>
-
-                  {/* USER */}
-                  <div className="mt-5 flex items-center gap-3 border-t pt-4">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 font-semibold text-indigo-700">
-                      {item.user?.fullName?.charAt(0)?.toUpperCase() || "U"}
-                    </div>
-
-                    <div className="overflow-hidden">
-                      <h4 className="font-semibold text-slate-900 truncate">
-                        {item.user?.fullName || "Anonymous User"}
-                      </h4>
-
-                      <p className="text-xs text-slate-500">
-                        {item.createdAt
-                          ? format(new Date(item.createdAt), "dd MMM yyyy")
-                          : ""}
-                      </p>
-                    </div>
-                  </div>
-
-                </div>
-              </CarouselItem>
-            ))}
-
-          </CarouselContent>
-
-          {/* NAVIGATION FIXED */}
-          {feedbacks.length > 3 && (
-            <>
-              <CarouselPrevious className="hidden md:flex left-2 z-10" />
-              <CarouselNext className="hidden md:flex right-2 z-10" />
-            </>
-          )}
-        </Carousel>
-
-        {/* STATS */}
-        <div className="mt-16 grid gap-8 text-center md:grid-cols-3">
-          <div>
-            <h3 className="text-4xl font-bold text-indigo-600">50K+</h3>
-            <p className="mt-2 text-slate-600">Resumes Analyzed</p>
-          </div>
-
-          <div>
-            <h3 className="text-4xl font-bold text-indigo-600">92%</h3>
-            <p className="mt-2 text-slate-600">ATS Improvement</p>
-          </div>
-
-          <div>
-            <h3 className="text-4xl font-bold text-indigo-600">10K+</h3>
-            <p className="mt-2 text-slate-600">Job Seekers Helped</p>
-          </div>
+        <div className="border rounded-xl p-5 bg-white">
+          <h3 className="font-semibold">Resume Quality</h3>
+          <p className="text-3xl font-bold mt-2">
+            {data.resumeScoreGauge?.resumeQuality}%
+          </p>
         </div>
 
+        <div className="border rounded-xl p-5 bg-white">
+          <h3 className="font-semibold">Recruiter Readability</h3>
+          <p className="text-3xl font-bold mt-2">
+            {data.resumeScoreGauge?.recruiterReadability}%
+          </p>
+        </div>
       </div>
-    </section>
+
+      {/* Skills Analysis */}
+      <div className="bg-white border rounded-xl p-6">
+        <h2 className="text-xl font-semibold mb-4">Skill Match Analysis</h2>
+
+        <div className="space-y-4">
+          {data.skillMatchAnalysis?.matchedSkills?.map((skill, index) => (
+            <div key={index}>
+              <div className="flex justify-between mb-1">
+                <span>{skill.skill}</span>
+                <span>{skill.score}%</span>
+              </div>
+
+              <div className="w-full bg-gray-200 rounded-full h-3">
+                <div
+                  className="bg-green-500 h-3 rounded-full"
+                  style={{
+                    width: `${skill.score}%`,
+                  }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Missing Skills */}
+      <div className="bg-white border rounded-xl p-6">
+        <h2 className="text-xl font-semibold text-red-600">Missing Skills</h2>
+
+        <div className="flex flex-wrap gap-2 mt-4">
+          {data.skillMatchAnalysis?.missingSkills?.map((skill, index) => (
+            <span
+              key={index}
+              className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Recommended Skills */}
+      <div className="bg-white border rounded-xl p-6">
+        <h2 className="text-xl font-semibold text-blue-600">
+          Recommended Skills
+        </h2>
+
+        <div className="flex flex-wrap gap-2 mt-4">
+          {data.skillMatchAnalysis?.recommendedSkills?.map((skill, index) => (
+            <span
+              key={index}
+              className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Resume Strengths */}
+      <div className="bg-white border rounded-xl p-6">
+        <h2 className="text-xl font-semibold text-green-600">
+          Resume Strengths
+        </h2>
+
+        <ul className="list-disc ml-6 mt-4 space-y-2">
+          {data.resumeStrengths?.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Resume Weaknesses */}
+      <div className="bg-white border rounded-xl p-6">
+        <h2 className="text-xl font-semibold text-red-600">
+          Resume Weaknesses
+        </h2>
+
+        <ul className="list-disc ml-6 mt-4 space-y-2">
+          {data.resumeWeaknesses?.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Missing Keywords */}
+      <div className="bg-white border rounded-xl p-6">
+        <h2 className="text-xl font-semibold">Missing Keywords</h2>
+
+        <div className="flex flex-wrap gap-2 mt-4">
+          {data.missingKeywordsAnalysis?.keywords?.map((keyword, index) => (
+            <span
+              key={index}
+              className="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm"
+            >
+              {keyword}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Improvements */}
+      <div className="bg-white border rounded-xl p-6">
+        <h2 className="text-xl font-semibold">Improvement Suggestions</h2>
+
+        <ul className="list-disc ml-6 mt-4 space-y-2">
+          {data.improvementSuggestions?.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Career Coach */}
+      <div className="bg-white border rounded-xl p-6">
+        <h2 className="text-xl font-semibold">AI Career Coach</h2>
+
+        <p className="mt-3 text-gray-700">{data.careerCoach?.overallAdvice}</p>
+
+        <div className="mt-6">
+          <h3 className="font-semibold mb-2">Recommended Learning Path</h3>
+
+          <ul className="list-disc ml-6">
+            {data.careerCoach?.recommendedLearningPath?.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* Interview Questions */}
+      <div className="bg-white border rounded-xl p-6">
+        <h2 className="text-xl font-semibold">Interview Questions</h2>
+
+        <div className="mt-5">
+          <h3 className="font-semibold">Technical Questions</h3>
+
+          <ul className="list-disc ml-6 mt-2">
+            {data.interviewQuestions?.technical?.map((question, index) => (
+              <li key={index}>{question}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="mt-5">
+          <h3 className="font-semibold">HR Questions</h3>
+
+          <ul className="list-disc ml-6 mt-2">
+            {data.interviewQuestions?.hr?.map((question, index) => (
+              <li key={index}>{question}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
   );
+}
+
+
+export function TypographyH3() {
+  return (
+    <h3 className="scroll-m-20 ">
+      The Joke Tax
+    </h3>
+  )
 }

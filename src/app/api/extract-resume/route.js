@@ -226,6 +226,9 @@ ${resumeText}
       data: {
         aiAnalysis: analysis,
 
+        companyName: companyName,
+        jobRole: jobTitle,
+
         // File Details
         fileUrl: viewUrl,
         fileName,

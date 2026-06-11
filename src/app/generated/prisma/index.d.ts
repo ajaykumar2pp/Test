@@ -2268,6 +2268,8 @@ export namespace Prisma {
 
   export type ResumeAnalysisMinAggregateOutputType = {
     id: string | null
+    companyName: string | null
+    jobRole: string | null
     fileUrl: string | null
     fileName: string | null
     fileSize: number | null
@@ -2278,6 +2280,8 @@ export namespace Prisma {
 
   export type ResumeAnalysisMaxAggregateOutputType = {
     id: string | null
+    companyName: string | null
+    jobRole: string | null
     fileUrl: string | null
     fileName: string | null
     fileSize: number | null
@@ -2289,6 +2293,8 @@ export namespace Prisma {
   export type ResumeAnalysisCountAggregateOutputType = {
     id: number
     aiAnalysis: number
+    companyName: number
+    jobRole: number
     fileUrl: number
     fileName: number
     fileSize: number
@@ -2309,6 +2315,8 @@ export namespace Prisma {
 
   export type ResumeAnalysisMinAggregateInputType = {
     id?: true
+    companyName?: true
+    jobRole?: true
     fileUrl?: true
     fileName?: true
     fileSize?: true
@@ -2319,6 +2327,8 @@ export namespace Prisma {
 
   export type ResumeAnalysisMaxAggregateInputType = {
     id?: true
+    companyName?: true
+    jobRole?: true
     fileUrl?: true
     fileName?: true
     fileSize?: true
@@ -2330,6 +2340,8 @@ export namespace Prisma {
   export type ResumeAnalysisCountAggregateInputType = {
     id?: true
     aiAnalysis?: true
+    companyName?: true
+    jobRole?: true
     fileUrl?: true
     fileName?: true
     fileSize?: true
@@ -2428,6 +2440,8 @@ export namespace Prisma {
   export type ResumeAnalysisGroupByOutputType = {
     id: string
     aiAnalysis: JsonValue | null
+    companyName: string | null
+    jobRole: string | null
     fileUrl: string | null
     fileName: string | null
     fileSize: number | null
@@ -2458,6 +2472,8 @@ export namespace Prisma {
   export type ResumeAnalysisSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     aiAnalysis?: boolean
+    companyName?: boolean
+    jobRole?: boolean
     fileUrl?: boolean
     fileName?: boolean
     fileSize?: boolean
@@ -2470,6 +2486,8 @@ export namespace Prisma {
   export type ResumeAnalysisSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     aiAnalysis?: boolean
+    companyName?: boolean
+    jobRole?: boolean
     fileUrl?: boolean
     fileName?: boolean
     fileSize?: boolean
@@ -2482,6 +2500,8 @@ export namespace Prisma {
   export type ResumeAnalysisSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     aiAnalysis?: boolean
+    companyName?: boolean
+    jobRole?: boolean
     fileUrl?: boolean
     fileName?: boolean
     fileSize?: boolean
@@ -2494,6 +2514,8 @@ export namespace Prisma {
   export type ResumeAnalysisSelectScalar = {
     id?: boolean
     aiAnalysis?: boolean
+    companyName?: boolean
+    jobRole?: boolean
     fileUrl?: boolean
     fileName?: boolean
     fileSize?: boolean
@@ -2502,7 +2524,7 @@ export namespace Prisma {
     userId?: boolean
   }
 
-  export type ResumeAnalysisOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "aiAnalysis" | "fileUrl" | "fileName" | "fileSize" | "fileType" | "createdAt" | "userId", ExtArgs["result"]["resumeAnalysis"]>
+  export type ResumeAnalysisOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "aiAnalysis" | "companyName" | "jobRole" | "fileUrl" | "fileName" | "fileSize" | "fileType" | "createdAt" | "userId", ExtArgs["result"]["resumeAnalysis"]>
   export type ResumeAnalysisInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2521,6 +2543,8 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       aiAnalysis: Prisma.JsonValue | null
+      companyName: string | null
+      jobRole: string | null
       fileUrl: string | null
       fileName: string | null
       fileSize: number | null
@@ -2953,6 +2977,8 @@ export namespace Prisma {
   interface ResumeAnalysisFieldRefs {
     readonly id: FieldRef<"ResumeAnalysis", 'String'>
     readonly aiAnalysis: FieldRef<"ResumeAnalysis", 'Json'>
+    readonly companyName: FieldRef<"ResumeAnalysis", 'String'>
+    readonly jobRole: FieldRef<"ResumeAnalysis", 'String'>
     readonly fileUrl: FieldRef<"ResumeAnalysis", 'String'>
     readonly fileName: FieldRef<"ResumeAnalysis", 'String'>
     readonly fileSize: FieldRef<"ResumeAnalysis", 'Int'>
@@ -4506,6 +4532,8 @@ export namespace Prisma {
   export const ResumeAnalysisScalarFieldEnum: {
     id: 'id',
     aiAnalysis: 'aiAnalysis',
+    companyName: 'companyName',
+    jobRole: 'jobRole',
     fileUrl: 'fileUrl',
     fileName: 'fileName',
     fileSize: 'fileSize',
@@ -4740,6 +4768,8 @@ export namespace Prisma {
     NOT?: ResumeAnalysisWhereInput | ResumeAnalysisWhereInput[]
     id?: StringFilter<"ResumeAnalysis"> | string
     aiAnalysis?: JsonNullableFilter<"ResumeAnalysis">
+    companyName?: StringNullableFilter<"ResumeAnalysis"> | string | null
+    jobRole?: StringNullableFilter<"ResumeAnalysis"> | string | null
     fileUrl?: StringNullableFilter<"ResumeAnalysis"> | string | null
     fileName?: StringNullableFilter<"ResumeAnalysis"> | string | null
     fileSize?: IntNullableFilter<"ResumeAnalysis"> | number | null
@@ -4752,6 +4782,8 @@ export namespace Prisma {
   export type ResumeAnalysisOrderByWithRelationInput = {
     id?: SortOrder
     aiAnalysis?: SortOrderInput | SortOrder
+    companyName?: SortOrderInput | SortOrder
+    jobRole?: SortOrderInput | SortOrder
     fileUrl?: SortOrderInput | SortOrder
     fileName?: SortOrderInput | SortOrder
     fileSize?: SortOrderInput | SortOrder
@@ -4767,6 +4799,8 @@ export namespace Prisma {
     OR?: ResumeAnalysisWhereInput[]
     NOT?: ResumeAnalysisWhereInput | ResumeAnalysisWhereInput[]
     aiAnalysis?: JsonNullableFilter<"ResumeAnalysis">
+    companyName?: StringNullableFilter<"ResumeAnalysis"> | string | null
+    jobRole?: StringNullableFilter<"ResumeAnalysis"> | string | null
     fileUrl?: StringNullableFilter<"ResumeAnalysis"> | string | null
     fileName?: StringNullableFilter<"ResumeAnalysis"> | string | null
     fileSize?: IntNullableFilter<"ResumeAnalysis"> | number | null
@@ -4779,6 +4813,8 @@ export namespace Prisma {
   export type ResumeAnalysisOrderByWithAggregationInput = {
     id?: SortOrder
     aiAnalysis?: SortOrderInput | SortOrder
+    companyName?: SortOrderInput | SortOrder
+    jobRole?: SortOrderInput | SortOrder
     fileUrl?: SortOrderInput | SortOrder
     fileName?: SortOrderInput | SortOrder
     fileSize?: SortOrderInput | SortOrder
@@ -4798,6 +4834,8 @@ export namespace Prisma {
     NOT?: ResumeAnalysisScalarWhereWithAggregatesInput | ResumeAnalysisScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"ResumeAnalysis"> | string
     aiAnalysis?: JsonNullableWithAggregatesFilter<"ResumeAnalysis">
+    companyName?: StringNullableWithAggregatesFilter<"ResumeAnalysis"> | string | null
+    jobRole?: StringNullableWithAggregatesFilter<"ResumeAnalysis"> | string | null
     fileUrl?: StringNullableWithAggregatesFilter<"ResumeAnalysis"> | string | null
     fileName?: StringNullableWithAggregatesFilter<"ResumeAnalysis"> | string | null
     fileSize?: IntNullableWithAggregatesFilter<"ResumeAnalysis"> | number | null
@@ -4951,6 +4989,8 @@ export namespace Prisma {
   export type ResumeAnalysisCreateInput = {
     id?: string
     aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
+    companyName?: string | null
+    jobRole?: string | null
     fileUrl?: string | null
     fileName?: string | null
     fileSize?: number | null
@@ -4962,6 +5002,8 @@ export namespace Prisma {
   export type ResumeAnalysisUncheckedCreateInput = {
     id?: string
     aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
+    companyName?: string | null
+    jobRole?: string | null
     fileUrl?: string | null
     fileName?: string | null
     fileSize?: number | null
@@ -4973,6 +5015,8 @@ export namespace Prisma {
   export type ResumeAnalysisUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    jobRole?: NullableStringFieldUpdateOperationsInput | string | null
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileName?: NullableStringFieldUpdateOperationsInput | string | null
     fileSize?: NullableIntFieldUpdateOperationsInput | number | null
@@ -4984,6 +5028,8 @@ export namespace Prisma {
   export type ResumeAnalysisUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    jobRole?: NullableStringFieldUpdateOperationsInput | string | null
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileName?: NullableStringFieldUpdateOperationsInput | string | null
     fileSize?: NullableIntFieldUpdateOperationsInput | number | null
@@ -4995,6 +5041,8 @@ export namespace Prisma {
   export type ResumeAnalysisCreateManyInput = {
     id?: string
     aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
+    companyName?: string | null
+    jobRole?: string | null
     fileUrl?: string | null
     fileName?: string | null
     fileSize?: number | null
@@ -5006,6 +5054,8 @@ export namespace Prisma {
   export type ResumeAnalysisUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    jobRole?: NullableStringFieldUpdateOperationsInput | string | null
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileName?: NullableStringFieldUpdateOperationsInput | string | null
     fileSize?: NullableIntFieldUpdateOperationsInput | number | null
@@ -5016,6 +5066,8 @@ export namespace Prisma {
   export type ResumeAnalysisUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    jobRole?: NullableStringFieldUpdateOperationsInput | string | null
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileName?: NullableStringFieldUpdateOperationsInput | string | null
     fileSize?: NullableIntFieldUpdateOperationsInput | number | null
@@ -5269,6 +5321,8 @@ export namespace Prisma {
   export type ResumeAnalysisCountOrderByAggregateInput = {
     id?: SortOrder
     aiAnalysis?: SortOrder
+    companyName?: SortOrder
+    jobRole?: SortOrder
     fileUrl?: SortOrder
     fileName?: SortOrder
     fileSize?: SortOrder
@@ -5283,6 +5337,8 @@ export namespace Prisma {
 
   export type ResumeAnalysisMaxOrderByAggregateInput = {
     id?: SortOrder
+    companyName?: SortOrder
+    jobRole?: SortOrder
     fileUrl?: SortOrder
     fileName?: SortOrder
     fileSize?: SortOrder
@@ -5293,6 +5349,8 @@ export namespace Prisma {
 
   export type ResumeAnalysisMinOrderByAggregateInput = {
     id?: SortOrder
+    companyName?: SortOrder
+    jobRole?: SortOrder
     fileUrl?: SortOrder
     fileName?: SortOrder
     fileSize?: SortOrder
@@ -5774,6 +5832,8 @@ export namespace Prisma {
   export type ResumeAnalysisCreateWithoutUserInput = {
     id?: string
     aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
+    companyName?: string | null
+    jobRole?: string | null
     fileUrl?: string | null
     fileName?: string | null
     fileSize?: number | null
@@ -5784,6 +5844,8 @@ export namespace Prisma {
   export type ResumeAnalysisUncheckedCreateWithoutUserInput = {
     id?: string
     aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
+    companyName?: string | null
+    jobRole?: string | null
     fileUrl?: string | null
     fileName?: string | null
     fileSize?: number | null
@@ -5847,6 +5909,8 @@ export namespace Prisma {
     NOT?: ResumeAnalysisScalarWhereInput | ResumeAnalysisScalarWhereInput[]
     id?: StringFilter<"ResumeAnalysis"> | string
     aiAnalysis?: JsonNullableFilter<"ResumeAnalysis">
+    companyName?: StringNullableFilter<"ResumeAnalysis"> | string | null
+    jobRole?: StringNullableFilter<"ResumeAnalysis"> | string | null
     fileUrl?: StringNullableFilter<"ResumeAnalysis"> | string | null
     fileName?: StringNullableFilter<"ResumeAnalysis"> | string | null
     fileSize?: IntNullableFilter<"ResumeAnalysis"> | number | null
@@ -6013,6 +6077,8 @@ export namespace Prisma {
   export type ResumeAnalysisCreateManyUserInput = {
     id?: string
     aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
+    companyName?: string | null
+    jobRole?: string | null
     fileUrl?: string | null
     fileName?: string | null
     fileSize?: number | null
@@ -6030,6 +6096,8 @@ export namespace Prisma {
   export type ResumeAnalysisUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    jobRole?: NullableStringFieldUpdateOperationsInput | string | null
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileName?: NullableStringFieldUpdateOperationsInput | string | null
     fileSize?: NullableIntFieldUpdateOperationsInput | number | null
@@ -6040,6 +6108,8 @@ export namespace Prisma {
   export type ResumeAnalysisUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    jobRole?: NullableStringFieldUpdateOperationsInput | string | null
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileName?: NullableStringFieldUpdateOperationsInput | string | null
     fileSize?: NullableIntFieldUpdateOperationsInput | number | null
@@ -6050,6 +6120,8 @@ export namespace Prisma {
   export type ResumeAnalysisUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     aiAnalysis?: NullableJsonNullValueInput | InputJsonValue
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    jobRole?: NullableStringFieldUpdateOperationsInput | string | null
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileName?: NullableStringFieldUpdateOperationsInput | string | null
     fileSize?: NullableIntFieldUpdateOperationsInput | number | null

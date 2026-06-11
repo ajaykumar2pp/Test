@@ -69,3 +69,52 @@ Results-driven Full Stack Web Developer with experience in building responsive a
 “UI is good, but feedback could include more examples.”
 “Good start, but needs better accuracy for technical roles.”
 “Some recommendations were repetitive and not very actionable.”
+
+
+
+Total Uploaded Resumes
+12
+
+Total Analyzed Resumes
+12
+
+AI Suggestions
+42
+
+Average ATS Score
+78%
+
+Company Name
+Google
+Role
+Frontend Developer
+File Name - Ajay-resume.pdf and Size is 1 MB
+Analyzed On:
+11 Jun 2026
+
+[View Report]
+
+
+
+
+
+ATS ke basis par.
+Excellent
+Strong
+Average
+Weak
+
+
+
+📄 MERN_Developer.pdf
+
+🎯 ATS Score       82%
+💪 Strength        Strong
+📈 Skill Match     87%
+🔑 Missing Keys    6
+🤖 Suggestions     8
+
+Analyzed:
+11 Jun 2026
+
+[View Analysis]

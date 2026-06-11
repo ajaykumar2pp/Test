@@ -1,281 +1,225 @@
-import { NextResponse } from "next/server";
+"use client";
 
-import { extractResumeText } from "@/lib/resume-parser";
-import { analyzeResume } from "@/lib/openrouter";
+import Link from "next/link";
+import { format } from "date-fns";
+import {
+  FileText,
+  Building2,
+  Briefcase,
+  Calendar,
+  ArrowRight,
+  TriangleAlert,
+  TrendingUp,
+} from "lucide-react";
 
-import cloudinary from "@/lib/cloudinary";
-import { prisma } from "@/lib/prisma";
-import path from "path";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/authOptions";
+export default function ResumeCard({ resume }) {
+  const atsScore = resume?.aiAnalysis?.atsScore || 0;
 
-export async function POST(request) {
-  try {
-    const session = await getServerSession(authOptions);
+  const missingSkills =
+    resume?.aiAnalysis?.skillMatchAnalysis?.missingSkills?.length || 0;
 
-    if (!session) {
-      return NextResponse.json(
-        {
-          error: "Unauthorized",
-        },
-        {
-          status: 401,
-        },
-      );
-    }
+  const getStrength = (score) => {
+    if (score >= 85)
+      return {
+        label: "Excellent",
+        badge:
+          "bg-emerald-100 text-emerald-700 border-emerald-200",
+      };
 
-    const userId = session.user.id;
+    if (score >= 75)
+      return {
+        label: "Strong",
+        badge:
+          "bg-green-100 text-green-700 border-green-200",
+      };
 
-    const formData = await request.formData();
+    if (score >= 60)
+      return {
+        label: "Average",
+        badge:
+          "bg-amber-100 text-amber-700 border-amber-200",
+      };
 
-    const companyName = formData.get("companyName");
-    const jobTitle = formData.get("jobTitle");
-    const jobDescription = formData.get("jobDescription");
-    const resume = formData.get("resume");
+    return {
+      label: "Needs Work",
+      badge:
+        "bg-red-100 text-red-700 border-red-200",
+    };
+  };
 
-    // =========================
-    // VALIDATION
-    // =========================
+  const strength = getStrength(atsScore);
 
-    if (!companyName || !jobTitle || !jobDescription || !resume) {
-      return NextResponse.json(
-        {
-          error: "All fields are required",
-        },
-        {
-          status: 400,
-        },
-      );
-    }
+  return (
+    <div
+      className="
+        group
+        flex
+        h-full
+        flex-col
+        overflow-hidden
+        rounded-3xl
+        border
+        bg-white
+        shadow-sm
+        transition-all
+        duration-300
+        hover:-translate-y-1
+        hover:shadow-xl
+      "
+    >
+      {/* Header */}
+      <div className="border-b bg-linear-to-r from-indigo-50 via-white to-indigo-50 p-5">
+        <div className="flex items-start gap-4">
+          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-indigo-100">
+            <FileText className="h-7 w-7 text-indigo-600" />
+          </div>
 
-    // =========================
-    // FILE DETAILS
-    // =========================
+          <div className="min-w-0 flex-1">
+            <h3
+              title={resume.fileName}
+              className="truncate text-lg font-semibold text-slate-900"
+            >
+              {resume.fileName}
+            </h3>
 
-    const fileName = resume.name;
-    const fileSize = resume.size;
-    const fileType = resume.type;
+            <p className="mt-1 text-sm text-slate-500">
+              {resume.fileSize
+                ? `${(resume.fileSize / 1024).toFixed(1)} KB`
+                : "Unknown Size"}
+            </p>
+          </div>
+        </div>
+      </div>
 
-    const bytes = await resume.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    const extension = path.extname(resume.name);
-    const fileNameWithoutExt = path.parse(resume.name).name;
+      {/* Body */}
+      <div className="flex flex-1 flex-col p-5">
+        {/* Company */}
+        <div className="mb-4 flex items-start gap-3">
+          <Building2 className="mt-0.5 h-4 w-4 shrink-0 text-indigo-500" />
 
-    const uploadedFile = await new Promise((resolve, reject) => {
-      cloudinary.uploader
-        .upload_stream(
-          {
-            resource_type: "raw",
-            folder: "resumes",
-            public_id: `${Date.now()}-${fileNameWithoutExt}${extension}`,
-            use_filename: true,
-            unique_filename: false,
-          },
-          (error, result) => {
-            if (error) reject(error);
-            else resolve(result);
-          },
-        )
-        .end(buffer);
-    });
+          <p
+            title={resume.companyName}
+            className="line-clamp-1 text-sm leading-6 text-slate-600"
+          >
+            {resume.companyName || "Company Not Provided"}
+          </p>
+        </div>
 
-    // console.log("Uploaded File:", uploadedFile);
+        {/* Role */}
+        <div className="mb-5 flex items-start gap-3">
+          <Briefcase className="mt-0.5 h-4 w-4 shrink-0 text-indigo-500" />
 
-    // Preview URL
-    const viewUrl = uploadedFile.secure_url;
+          <p
+            title={resume.jobRole}
+            className="line-clamp-1 text-sm leading-6 text-slate-600"
+          >
+            {resume.jobRole || "Role Not Provided"}
+          </p>
+        </div>
 
-    // Download URL
-    const downloadUrl = uploadedFile.secure_url.replace(
-      "/upload/",
-      "/upload/fl_attachment/",
-    );
+        {/* Strength Badge */}
+        <div className="mb-5">
+          <span
+            className={`
+              inline-flex
+              w-fit
+              items-center
+              rounded-full
+              border
+              px-3
+              py-1
+              text-xs
+              font-semibold
+              shadow-sm
+              ${strength.badge}
+            `}
+          >
+            {strength.label}
+          </span>
+        </div>
 
-    // console.log("View URL:", viewUrl);
-    // console.log("Download URL:", downloadUrl);
+        {/* Stats */}
+        <div className="grid grid-cols-2 gap-3">
+          {/* ATS */}
+          <div className="rounded-2xl border bg-slate-50 p-4 transition-colors hover:bg-slate-100">
+            <p className="text-xs font-medium text-slate-500">
+              ATS Score
+            </p>
 
-    // =========================
-    // RESUME TEXT EXTRACT
-    // =========================
+            <div className="mt-3 flex items-center gap-3">
+              <div className="rounded-xl bg-blue-100 p-2.5">
+                <TrendingUp className="h-5 w-5 text-blue-600" />
+              </div>
 
-    const resumeText = await extractResumeText(resume);
+              <p className="text-lg font-bold text-slate-900">
+                {atsScore}%
+              </p>
+            </div>
+          </div>
 
-    // =========================
-    // AI PROMPT
-    // =========================
+          {/* Missing Skills */}
+          <div className="rounded-2xl border bg-slate-50 p-4 transition-colors hover:bg-slate-100">
+            <p className="text-xs font-medium text-slate-500">
+              Missing Skills
+            </p>
 
-    const prompt = `
-You are an expert ATS Resume Analyzer, Recruiter, Career Coach, and Hiring Manager.
+            <div className="mt-3 flex items-center gap-3">
+              <div className="rounded-xl bg-orange-100 p-2.5">
+                <TriangleAlert className="h-5 w-5 text-orange-600" />
+              </div>
 
-Analyze the resume against the provided Job Description.
+              <p className="text-lg font-bold text-slate-900">
+                {missingSkills}
+              </p>
+            </div>
+          </div>
+        </div>
 
-IMPORTANT RULES:
-- Return ONLY valid JSON.
-- Do not return markdown.
-- Do not wrap response in \`\`\`json.
-- All scores must be between 0 and 100.
-- Give realistic and professional feedback.
+        {/* Footer */}
+        <div className="mt-auto pt-5">
+          <div className="mb-4 border-t" />
 
-Return JSON in this exact format:
+          <div className="flex items-center justify-between gap-3">
+            <div
+              title={format(
+                new Date(resume.createdAt),
+                "dd MMM yyyy, hh:mm a"
+              )}
+              className="flex items-center gap-2 text-sm text-slate-500"
+            >
+              <Calendar className="h-4 w-4 shrink-0" />
 
-{
-  "atsScore": 0,
-  "matchPercentage": 0,
+              <span>
+                {format(
+                  new Date(resume.createdAt),
+                  "dd MMM yyyy"
+                )}
+              </span>
+            </div>
 
-  "resumeSummary": "",
-
-  "finalVerdict": "",
-
-  "resumeScoreGauge": {
-    "atsCompatibility": 0,
-    "resumeQuality": 0,
-    "recruiterReadability": 0
-  },
-
-  "skillMatchAnalysis": {
-    "matchedSkills": [
-      {
-        "skill": "",
-        "score": 0
-      }
-    ],
-    "missingSkills": [],
-    "recommendedSkills": [],
-    "skillGapPercentage": 0
-  },
-
-  "sectionWiseAnalysis": {
-    "professionalSummary": {
-      "score": 0,
-      "feedback": "",
-      "suggestion": ""
-    },
-    "skillsSection": {
-      "score": 0,
-      "feedback": "",
-      "suggestion": ""
-    },
-    "experienceSection": {
-      "score": 0,
-      "feedback": "",
-      "suggestion": ""
-    },
-    "projectsSection": {
-      "score": 0,
-      "feedback": "",
-      "suggestion": ""
-    },
-    "educationSection": {
-      "score": 0,
-      "feedback": "",
-      "suggestion": ""
-    }
-  },
-
-  "missingKeywordsAnalysis": {
-    "keywords": [],
-    "priorityKeywords": [],
-    "atsImpactLevel": "Low"
-  },
-
-  "resumeStrengths": [],
-
-  "resumeWeaknesses": [],
-
-  "improvementSuggestions": [],
-
-  "careerCoach": {
-    "overallAdvice": "",
-    "recommendedLearningPath": [],
-    "recommendedProjects": [],
-    "nextCareerSteps": []
-  },
-
-  "interviewQuestions": {
-    "technical": [],
-    "projectBased": [],
-    "behavioral": [],
-    "hr": []
-  }
-}
-
-JOB TITLE:
-${jobTitle}
-
-COMPANY:
-${companyName}
-
-JOB DESCRIPTION:
-${jobDescription}
-
-RESUME:
-${resumeText}
-`;
-
-    // =========================
-    // AI RESPONSE
-    // =========================
-
-    const aiResponse = await analyzeResume(prompt);
-
-    const cleanResponse = aiResponse
-      .replace(/```json/g, "")
-      .replace(/```/g, "")
-      .trim();
-
-    const analysis = JSON.parse(cleanResponse);
-    console.log("AI Analysis:", analysis);
-
-    // =========================
-    // DATABASE SAVE
-    // =========================
-
-    const savedAnalysis = await prisma.resumeAnalysis.create({
-      data: {
-        atsScore: analysis.atsScore || 0,
-
-        matchPercentage: analysis.matchPercentage || 0,
-
-        resumeQuality: analysis.resumeScoreGauge?.resumeQuality || 0,
-
-        recruiterReadability:
-          analysis.resumeScoreGauge?.recruiterReadability || 0,
-
-        missingSkills: analysis.skillMatchAnalysis?.missingSkills || [],
-
-        missingKeywords: analysis.missingKeywordsAnalysis?.keywords || [],
-
-        finalVerdict: analysis.finalVerdict || "",
-
-        // File Details
-        fileUrl: viewUrl,
-        fileName,
-        fileSize,
-        fileType,
-
-        // User Relation
-        userId,
-      },
-    });
-
-    // =========================
-    // RESPONSE
-    // =========================
-
-    return NextResponse.json({
-      success: true,
-      analysis,
-      savedAnalysis,
-    });
-  } catch (error) {
-    console.error(error);
-
-    return NextResponse.json(
-      {
-        error: error.message || "Something went wrong",
-      },
-      {
-        status: 500,
-      },
-    );
-  }
+            <Link
+              href={`/user/resume-result/${resume.id}`}
+              className="
+                inline-flex
+                items-center
+                gap-2
+                rounded-xl
+                bg-indigo-600
+                px-4
+                py-2
+                text-sm
+                font-medium
+                text-white
+                transition-all
+                hover:bg-indigo-700
+              "
+            >
+              View Report
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

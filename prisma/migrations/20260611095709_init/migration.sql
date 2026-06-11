@@ -19,6 +19,8 @@ CREATE TABLE "user" (
 CREATE TABLE "resume_analyses" (
     "id" TEXT NOT NULL,
     "aiAnalysis" JSONB,
+    "companyName" TEXT,
+    "jobRole" TEXT,
     "fileUrl" TEXT,
     "fileName" TEXT,
     "fileSize" INTEGER,
