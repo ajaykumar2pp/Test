@@ -7,6 +7,27 @@ export const metadata = {
 
 export default async function AdminPage() {
 
+  const users = await prisma.user.findMany({
+  where: {
+    role: "USER",
+  },
+
+  include: {
+    resumeAnalyses: {
+      orderBy: {
+        createdAt: "desc",
+      },
+    },
+  },
+
+  orderBy: {
+    createdAt: "desc",
+  },
+
+  take: 5,
+});
+
+  console.log("Admin User Data List :", users);
 
   const totalUsers = await prisma.user.count({
     where: {
@@ -22,15 +43,14 @@ export default async function AdminPage() {
 
   const totalResumes = await prisma.resumeAnalysis.count();
 
-
   const totalFeedbacks = await prisma.feedback.count();
 
   const stats = {
     totalUsers,
     totalAdmins,
     totalResumes,
-    totalFeedbacks
-    
+    totalFeedbacks,
+    users
   };
 
   return <Dashboard stats={stats} />;

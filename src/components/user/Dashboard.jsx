@@ -109,7 +109,7 @@ export default async function Dashboard({ stats, analyses }) {
         {/* Stats */}
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {/* ATS */}
-          <Card
+          {/* <Card
             className={`
               rounded-[28px] border-0 shadow-sm
               transition-all duration-300
@@ -134,7 +134,7 @@ export default async function Dashboard({ stats, analyses }) {
 
               <Progress value={82} className="mt-5" />
             </CardContent>
-          </Card>
+          </Card> */}
 
           {/* Uploaded */}
           <Card className="rounded-[28px] border-0 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
@@ -158,7 +158,7 @@ export default async function Dashboard({ stats, analyses }) {
           </Card>
 
           {/* Jobs */}
-          <Card className="rounded-[28px] border-0 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+          {/* <Card className="rounded-[28px] border-0 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -172,10 +172,10 @@ export default async function Dashboard({ stats, analyses }) {
                 </div>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
 
           {/* Suggestions */}
-          <Card
+          {/* <Card
             className={`
               rounded-[28px] border-0 shadow-sm
               hover:-translate-y-1 hover:shadow-lg
@@ -198,7 +198,7 @@ export default async function Dashboard({ stats, analyses }) {
                 </div>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
         </div>
 
         {/* Card Add */}

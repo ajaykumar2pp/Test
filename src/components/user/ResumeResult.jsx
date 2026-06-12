@@ -2,12 +2,29 @@
 
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import ResumeReport from "@/components/pdf/ResumeReport";
-import { Download, Loader2 } from "lucide-react";
-import { Building2, Briefcase, Calendar, FileText } from "lucide-react";
+import { Download, Loader } from "lucide-react";
+import {
+  Building2,
+  Briefcase,
+  Calendar,
+  FileText,
+  Mail,
+  Printer,
+} from "lucide-react";
 import { format } from "date-fns";
+import { useState } from "react";
+import { useSession } from "next-auth/react";
+import { toast } from "sonner";
 
 export default function ResumeResult({ resumeAnalysis }) {
+  // console.log("User Admin Data :", resumeAnalysis)
+  const { data: session } = useSession();
+  const email = session?.user?.email;
+
+  // console.log("Email User", session?.user?.email);
+  const [emailLoading, setEmailLoading] = useState(false);
   const data = resumeAnalysis?.aiAnalysis;
+  // console.log("company data :", resumeAnalysis)
 
   if (!data) {
     return (
@@ -18,14 +35,84 @@ export default function ResumeResult({ resumeAnalysis }) {
       </div>
     );
   }
+  const sendReportEmail = async () => {
+    if (!email) {
+      toast.error("Please enter an email address");
+      return;
+    }
+
+    setEmailLoading(true);
+
+    // const loadingToast = toast.loading("Sending report...");
+
+    try {
+      const res = await fetch("/api/send-report", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          reportData: data,
+        }),
+      });
+
+      const result = await res.json();
+
+      // toast.dismiss(loadingToast);
+
+      if (result.success) {
+        toast.success("Email sent successfully 🚀");
+      } else {
+        toast.error(result.message || "Failed to send email");
+      }
+    } catch (error) {
+      toast.dismiss(loadingToast);
+      toast.error("Something went wrong while sending email");
+    } finally {
+      setEmailLoading(false);
+    }
+  };
 
   return (
     <div className="rounded-2xl border bg-white p-6 ">
+      {/*  Link */}
+      <div className="w-full flex justify-end gap-5">
+        {/* email button */}
+        <button
+          onClick={sendReportEmail}
+          disabled={emailLoading}
+          className="no-print group relative overflow-hidden rounded-xl bg-linear-to-r from-emerald-600 via-teal-600 to-cyan-600 px-6 py-3 font-semibold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-emerald-500/40 cursor-pointer disabled:opacity-50"
+        >
+          <span className="relative flex items-center gap-2">
+            {emailLoading ? (
+              <>
+                <Loader className="h-5 w-5 animate-spin" />
+                Sending...
+              </>
+            ) : (
+              <>
+                <Mail className="h-5 w-5" />
+                Send to Email
+              </>
+            )}
+          </span>
+        </button>
 
-      {/* Download Link */}
-      <div className="w-full flex justify-end">
+        {/* Print PDF  */}
+        <button
+          onClick={() => window.print()}
+          className="no-print group relative overflow-hidden rounded-xl bg-linear-to-r from-gray-700 via-gray-800 to-black px-6 py-3 font-semibold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-black/40 cursor-pointer"
+        >
+          <span className="relative flex items-center gap-2">
+            <Printer className="h-5 w-5" />
+            Print Report
+          </span>
+        </button>
+
+        {/* PDF Download Link */}
         <PDFDownloadLink
-          document={<ResumeReport data={data} />}
+          document={<ResumeReport data={data} meta={resumeAnalysis} />}
           fileName="resume-analysis-report.pdf"
         >
           {({ loading }) => (
@@ -35,7 +122,7 @@ export default function ResumeResult({ resumeAnalysis }) {
               <span className="relative flex items-center gap-2">
                 {loading ? (
                   <>
-                    <Loader2 className="h-5 w-5 animate-spin" />
+                    <Loader className="h-5 w-5 animate-spin" />
                     Generating PDF...
                   </>
                 ) : (

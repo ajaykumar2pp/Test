@@ -47,7 +47,7 @@ const UserDetailsPage = ({ user }) => {
                 </div>
 
                 <div>
-                  <p className="text-xs text-indigo-100">User</p>
+                  <p className="text-xs text-indigo-100">  {user?.fullName || "Unknown User"}</p>
 
                   <p className="max-w-45 truncate font-semibold">
                     {user?.name || user?.email || "Unknown User"}

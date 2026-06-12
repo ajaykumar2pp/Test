@@ -174,8 +174,16 @@ export default function Dashboard({ stats }) {
         </Card>
       </div>
 
+
+
+
+      <div className="mb-2 mt-8">
+        <h1 className="text-2xl font-bold">Latest Users</h1>
+      </div>
+
       {/* TABLE */}
-      <Card className="mt-8 overflow-hidden rounded-3xl border-0 shadow-lg">
+      <Card className="mt-4 overflow-hidden rounded-3xl border-0 shadow-lg">
+      
         <CardContent className="p-0">
           {/* Table Header */}
           <div
@@ -204,7 +212,7 @@ export default function Dashboard({ stats }) {
           </div>
 
           {/* Table Body */}
-          {userList.map((user) => (
+          {stats.users.map((user) => (
             <div
               key={user.id}
               className="

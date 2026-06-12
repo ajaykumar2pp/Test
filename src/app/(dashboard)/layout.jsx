@@ -90,6 +90,7 @@ export default async function DashboardLayout({
             flex items-center justify-between
             px-6 backdrop-blur-xl
             sticky top-0 z-50
+            print:hidden
             ${theme.header}
           `}
         >

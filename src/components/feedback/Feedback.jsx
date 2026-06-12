@@ -1,7 +1,7 @@
 "use client";
 
 import { Formik, Form, ErrorMessage } from "formik";
-import { Star } from "lucide-react";
+import { Star, MessageSquare } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { feedbackSchema } from "@/schemas/feedback-schema";
 import { toast } from "sonner";
@@ -15,6 +15,7 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { Loader2, MessageSquarePlus } from "lucide-react";
+import Link from "next/link";
 
 const initialValues = {
   rating: 0,
@@ -22,9 +23,14 @@ const initialValues = {
 };
 
 export default function FeedbackPage() {
+  const theme = {
+    hero: "from-indigo-600 via-purple-600 to-pink-600",
+    heroText: "text-white/90",
+    button: "text-black",
+  };
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      console.log(values);
+      // console.log(values);
 
       const response = await fetch("/api/feedback", {
         method: "POST",
@@ -50,6 +56,44 @@ export default function FeedbackPage() {
 
   return (
     <div className="w-full mx-auto">
+      {/* Hero - Share Feedback */}
+
+      <div
+        className={`
+    mb-8 rounded-[32px]
+    bg-linear-to-r
+    ${theme.hero}
+    p-8 text-white shadow-xl
+  `}
+      >
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <h2 className="mb-3 text-3xl font-bold leading-tight">
+              Share Your Feedback & Help Us Improve 🚀
+            </h2>
+
+            <p className={`max-w-2xl text-sm md:text-base ${theme.heroText}`}>
+              Your feedback helps us improve the platform. Share your
+              experience, suggestions, or issues and help us build a better
+              experience for everyone.
+            </p>
+          </div>
+
+          <Button
+            className={`
+          h-12 rounded-2xl bg-white px-6
+          hover:bg-slate-100
+          shadow-md transition-all duration-300
+          hover:scale-[1.02]
+          cursor-pointer
+          ${theme.button}
+        `}
+          >
+            <MessageSquare className="mr-2 h-5 w-5" />
+            Share Feedback
+          </Button>
+        </div>
+      </div>
       <Card>
         <CardHeader>
           <CardTitle>Share Your Feedback</CardTitle>
@@ -110,7 +154,7 @@ export default function FeedbackPage() {
                     rows={10}
                     placeholder="Tell us about your experience..."
                     value={values.message}
-                    className="min-h-100 max-h-400 reszize-y"
+                    className="min-h-48 max-h-64 reszize-y"
                     onChange={handleChange}
                   />
 
@@ -122,16 +166,25 @@ export default function FeedbackPage() {
                 </div>
 
                 {/* Feedback Button */}
-                <div className="flex justify-end mt-2">
+
+                <div className="flex justify-end mt-4">
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="min-w-50 cursor-pointer"
+                    className="
+      min-w-50 h-12 px-6 rounded-2xl cursor-pointer
+      flex items-center justify-center gap-2
+      bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600
+      text-white shadow-md
+      transition-all duration-300
+      hover:scale-[1.02] hover:shadow-lg
+      disabled:opacity-60 disabled:cursor-not-allowed
+    "
                   >
                     {isSubmitting ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        Submitting Feedback...
+                        Submitting...
                       </>
                     ) : (
                       <>
