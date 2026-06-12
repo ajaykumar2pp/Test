@@ -46,13 +46,11 @@ export default function Navbar() {
         {/* Desktop Buttons */}
         <div className="hidden items-center gap-3 md:flex">
           <Link href="/login">
-            <Button  className="bg-indigo-600 hover:bg-indigo-700">
-              Login
-            </Button>
+            <Button className="bg-indigo-600 hover:bg-indigo-700 cursor-pointer">Login</Button>
           </Link>
-
-<Link href="/register">
-            <Button   className="bg-indigo-600 hover:bg-indigo-700">
+ 
+          <Link href="/register">
+            <Button className="bg-indigo-600 hover:bg-indigo-700 cursor-pointer">
               Register
             </Button>
           </Link>
@@ -88,12 +86,19 @@ export default function Navbar() {
               ))}
 
               <div className="space-y-3 pt-4">
-                <Button asChild variant="outline" className="w-full">
+                <Button
+                  asChild
+                  variant="outline"
+                  className="w-full cursor-pointer"
+                >
                   <Link href="/login">Login</Link>
                 </Button>
 
-                <Button className="w-full bg-indigo-600 hover:bg-indigo-700">
-                  Get Started
+                <Button
+                  asChild
+                  className="w-full bg-indigo-600 hover:bg-indigo-700 cursor-pointer"
+                >
+                  <Link href="/register">Register</Link>
                 </Button>
               </div>
             </div>

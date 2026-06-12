@@ -142,7 +142,7 @@ export default async function DashboardLayout({
           {/* Right */}
           <div className="flex items-center gap-4">
             {/* Notification */}
-            <button
+            {/* <button
               className={`
                 relative p-2 rounded-full
                 transition-all duration-300
@@ -152,7 +152,7 @@ export default async function DashboardLayout({
               <Bell className="h-5 w-5 text-slate-700" />
 
               <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-red-500" />
-            </button>
+            </button> */}
 
             {/* Avatar */}
             <Avatar className="h-10 w-10 shadow-lg cursor-pointer">

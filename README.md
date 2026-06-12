@@ -118,3 +118,37 @@ Analyzed:
 11 Jun 2026
 
 [View Analysis]
+
+
+┌─────────────────┐
+│ Total Resumes   │
+│ 5,432           │
+└─────────────────┘
+
+await prisma.resumeAnalysis.findMany({
+  include: {
+    user: {
+      select: {
+        fullName: true,
+        email: true,
+      },
+    },
+  },
+  orderBy: {
+    createdAt: "desc",
+  },
+});
+
+
+await prisma.user.findMany({
+  include: {
+    resumeAnalyses: true,
+  },
+});
+
+
+Admin 
+FullName
+Email
+Joined On
+Total Resumes

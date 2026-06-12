@@ -13,7 +13,7 @@ import {
   Briefcase,
   FileText,
   Upload,
-  Loader2,
+  Loader,
   FileSearch,
   FileBadge,
   X,
@@ -407,7 +407,7 @@ export default function ResumeAnalyzeForm() {
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      <Loader className="mr-2 h-4 w-4 animate-spin" />
                       Analyzing Resume...
                     </>
                   ) : (

@@ -85,10 +85,10 @@ export async function POST(request) {
     const viewUrl = uploadedFile.secure_url;
 
     // Download URL
-    const downloadUrl = uploadedFile.secure_url.replace(
-      "/upload/",
-      "/upload/fl_attachment/",
-    );
+    // const downloadUrl = uploadedFile.secure_url.replace(
+    //   "/upload/",
+    //   "/upload/fl_attachment/",
+    // );
 
     // console.log("View URL:", viewUrl);
     // console.log("Download URL:", downloadUrl);

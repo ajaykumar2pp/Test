@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { format } from "date-fns";
 import { toast } from "sonner";
-
-import { Users, Shield, UserCheck, Trash2 } from "lucide-react";
+import { ShieldCheck, FileText } from "lucide-react";
+import { Users, MessageSquare , UserCheck, Trash2 } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -30,17 +30,8 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-export default function Dashboard({ users }) {
-  const [userList, setUserList] = useState(users);
-
-  const totalUsers = userList.length;
-
-  const totalAdmins = userList.filter((user) => user.role === "ADMIN").length;
-
-  const totalNormalUsers = userList.filter(
-    (user) => user.role === "USER",
-  ).length;
-
+export default function Dashboard({ stats }) {
+  const [userList, setUserList] = useState([]);
   const handleRoleChange = async (userId, role) => {
     try {
       const response = await fetch(`/api/admin/users/${userId}/role`, {
@@ -104,42 +95,81 @@ export default function Dashboard({ users }) {
         <p className="text-slate-500">Manage platform users</p>
       </div>
 
-      {/* STATS */}
+      {/* Stats */}
+      <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2  xl:grid-cols-4 ">
+        {/* Total Users */}
+        <Card className="rounded-[28px] border-0 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-slate-500">Total Users</p>
 
-      <div className="grid gap-6 md:grid-cols-3">
-        <Card>
-          <CardContent className="flex items-center justify-between p-6">
-            <div>
-              <p>Total Users</p>
+                <h3 className="mt-2 text-3xl font-bold text-slate-800">
+                  {stats.totalUsers}
+                </h3>
+              </div>
 
-              <h2 className="text-4xl font-bold">{totalUsers}</h2>
+              <div className="rounded-2xl bg-blue-100 p-3">
+                <Users className="h-6 w-6 text-blue-600" />
+              </div>
             </div>
-
-            <Users />
           </CardContent>
         </Card>
 
-        <Card>
-          <CardContent className="flex items-center justify-between p-6">
-            <div>
-              <p>Admins</p>
+        {/* Total Admins */}
+        <Card className="rounded-[28px] border-0 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-slate-500">Total Admins</p>
 
-              <h2 className="text-4xl font-bold">{totalAdmins}</h2>
+                <h3 className="mt-2 text-3xl font-bold text-slate-800">
+                  {stats.totalAdmins}
+                </h3>
+              </div>
+
+              <div className="rounded-2xl bg-red-100 p-3">
+                <ShieldCheck className="h-6 w-6 text-red-600" />
+              </div>
             </div>
-
-            <Shield />
           </CardContent>
         </Card>
 
-        <Card>
-          <CardContent className="flex items-center justify-between p-6">
-            <div>
-              <p>Users</p>
+        {/* Total Resumes */}
+        <Card className="rounded-[28px] border-0 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-slate-500">Total Resumes</p>
 
-              <h2 className="text-4xl font-bold">{totalNormalUsers}</h2>
+                <h3 className="mt-2 text-3xl font-bold text-slate-800">
+                  {stats.totalResumes}
+                </h3>
+              </div>
+
+              <div className="rounded-2xl bg-emerald-100 p-3">
+                <FileText className="h-6 w-6 text-emerald-600" />
+              </div>
             </div>
+          </CardContent>
+        </Card>
 
-            <UserCheck />
+        {/* Total Feedbacks */}
+        <Card className="rounded-[28px] border-0 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-slate-500">Total Feedbacks</p>
+
+                <h3 className="mt-2 text-3xl font-bold text-slate-800">
+                  {stats.totalFeedbacks || 0}
+                </h3>
+              </div>
+
+              <div className="rounded-2xl bg-blue-100 p-3">
+                <MessageSquare className="h-6 w-6 text-blue-600" />
+              </div>
+            </div>
           </CardContent>
         </Card>
       </div>
