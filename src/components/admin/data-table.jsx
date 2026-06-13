@@ -45,15 +45,27 @@ export function DataTable({ columns, data }) {
 
   return (
     <div className="space-y-4">
-      <div className="space-y-2">
-        <h1 className="text-2xl font-medium tracking-tight text-slate-900 dark:text-white">
-          User Management Dashboard
-        </h1>
+      <div
+        className="
+    relative overflow-hidden
+    rounded-3xl p-6 md:p-8
+    bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600
+    text-white shadow-xl
+  "
+      >
+        {/* subtle glow background */}
+        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top_left,white,transparent_60%)]" />
 
-        <p className="text-muted-foreground text-sm md:text-base max-w-2xl">
-          Monitor user registrations, resume analyses, and engagement metrics in
-          real-time to understand platform activity and growth.
-        </p>
+        <div className="relative space-y-2">
+          <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">
+            User Management Dashboard
+          </h1>
+
+          <p className="text-white/85 text-sm md:text-base max-w-2xl leading-relaxed">
+            Monitor user registrations, resume analyses, and engagement metrics
+            in real-time to understand platform activity and growth.
+          </p>
+        </div>
       </div>
 
       {/* Search */}

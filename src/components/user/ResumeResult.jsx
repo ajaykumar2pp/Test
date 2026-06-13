@@ -13,15 +13,13 @@ import {
 } from "lucide-react";
 import { format } from "date-fns";
 import { useState } from "react";
-import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 
 export default function ResumeResult({ resumeAnalysis }) {
-  // console.log("User Admin Data :", resumeAnalysis)
-  const { data: session } = useSession();
-  const email = session?.user?.email;
+  const email = resumeAnalysis?.user?.email;
 
-  // console.log("Email User", session?.user?.email);
+  // console.log("check User Email via user... :", resumeAnalysis?.user?.email);
+
   const [emailLoading, setEmailLoading] = useState(false);
   const data = resumeAnalysis?.aiAnalysis;
   // console.log("company data :", resumeAnalysis)
@@ -77,7 +75,7 @@ export default function ResumeResult({ resumeAnalysis }) {
   return (
     <div className="rounded-2xl border bg-white p-6 ">
       {/*  Link */}
-      <div className="w-full flex justify-end gap-5">
+      <div className="w-full flex justify-end gap-5 print:hidden">
         {/* email button */}
         <button
           onClick={sendReportEmail}
@@ -140,7 +138,7 @@ export default function ResumeResult({ resumeAnalysis }) {
       {/* Company Name or Position */}
       <div className="mt-5 rounded-2xl border bg-white p-6 shadow-sm">
         <div className="mb-5">
-          <h2 className="text-lg font-semibold text-slate-900">
+          <h2 className="text-3xl font-semibold text-slate-900">
             Resume Information
           </h2>
 
@@ -226,7 +224,7 @@ export default function ResumeResult({ resumeAnalysis }) {
 
       {/* Header */}
       <div className="bg-white border rounded-xl shadow-sm p-6 mt-5">
-        <h1 className="text-3xl font-bold">ATS Score: {data.atsScore}/100</h1>
+        <h1 className="text-xl  font-bold">ATS Score: {data.atsScore}/100</h1>
 
         <p className="mt-2 text-gray-600">
           Match Percentage: {data.matchPercentage}%
@@ -245,21 +243,21 @@ export default function ResumeResult({ resumeAnalysis }) {
       {/* Score Gauges */}
       <div className="grid md:grid-cols-3 gap-4 mt-5">
         <div className="border rounded-xl p-5 bg-white">
-          <h3 className="font-semibold">ATS Compatibility</h3>
+          <h3 className="text-xl  font-bold">ATS Compatibility</h3>
           <p className="text-3xl font-bold mt-2">
             {data.resumeScoreGauge?.atsCompatibility}%
           </p>
         </div>
 
         <div className="border rounded-xl p-5 bg-white">
-          <h3 className="font-semibold">Resume Quality</h3>
+          <h3 className="text-xl  font-bold">Resume Quality</h3>
           <p className="text-3xl font-bold mt-2">
             {data.resumeScoreGauge?.resumeQuality}%
           </p>
         </div>
 
         <div className="border rounded-xl p-5 bg-white">
-          <h3 className="font-semibold">Recruiter Readability</h3>
+          <h3 className="text-xl  font-bold">Recruiter Readability</h3>
           <p className="text-3xl font-bold mt-2">
             {data.resumeScoreGauge?.recruiterReadability}%
           </p>
@@ -268,7 +266,7 @@ export default function ResumeResult({ resumeAnalysis }) {
 
       {/* Skills Analysis */}
       <div className="bg-white border rounded-xl p-6 mt-5">
-        <h2 className="text-xl font-semibold mb-4">Skill Match Analysis</h2>
+        <h2 className="text-xl font-bold mb-4">Skill Match Analysis</h2>
 
         <div className="space-y-4">
           {data.skillMatchAnalysis?.matchedSkills?.map((skill, index) => (
@@ -293,7 +291,7 @@ export default function ResumeResult({ resumeAnalysis }) {
 
       {/* Missing Skills */}
       <div className="bg-white border rounded-xl p-6 mt-5">
-        <h2 className="text-xl font-semibold text-red-600">Missing Skills</h2>
+        <h2 className="text-xl font-bold text-red-600">Missing Skills</h2>
 
         <div className="flex flex-wrap gap-2 mt-4">
           {data.skillMatchAnalysis?.missingSkills?.map((skill, index) => (
@@ -309,7 +307,7 @@ export default function ResumeResult({ resumeAnalysis }) {
 
       {/* Recommended Skills */}
       <div className="bg-white border rounded-xl p-6 mt-5">
-        <h2 className="text-xl font-semibold text-blue-600">
+        <h2 className="text-xl font-bold text-blue-600">
           Recommended Skills
         </h2>
 
@@ -327,7 +325,7 @@ export default function ResumeResult({ resumeAnalysis }) {
 
       {/* Resume Strengths */}
       <div className="bg-white border rounded-xl p-6 mt-5">
-        <h2 className="text-xl font-semibold text-green-600">
+        <h2 className="text-xl font-bold text-green-600">
           Resume Strengths
         </h2>
 
@@ -340,7 +338,7 @@ export default function ResumeResult({ resumeAnalysis }) {
 
       {/* Resume Weaknesses */}
       <div className="bg-white border rounded-xl p-6 mt-5">
-        <h2 className="text-xl font-semibold text-red-600">
+        <h2 className="text-xl font-bold text-red-600">
           Resume Weaknesses
         </h2>
 
@@ -353,7 +351,7 @@ export default function ResumeResult({ resumeAnalysis }) {
 
       {/* Missing Keywords */}
       <div className="bg-white border rounded-xl p-6 mt-5">
-        <h2 className="text-xl font-semibold">Missing Keywords</h2>
+        <h2 className="text-xl font-bold">Missing Keywords</h2>
 
         <div className="flex flex-wrap gap-2 mt-4">
           {data.missingKeywordsAnalysis?.keywords?.map((keyword, index) => (
@@ -369,7 +367,7 @@ export default function ResumeResult({ resumeAnalysis }) {
 
       {/* Improvements */}
       <div className="bg-white border rounded-xl p-6 mt-5">
-        <h2 className="text-xl font-semibold">Improvement Suggestions</h2>
+        <h2 className="text-xl font-bold">Improvement Suggestions</h2>
 
         <ul className="list-disc ml-6 mt-4 space-y-2">
           {data.improvementSuggestions?.map((item, index) => (
@@ -380,7 +378,7 @@ export default function ResumeResult({ resumeAnalysis }) {
 
       {/* Career Coach */}
       <div className="bg-white border rounded-xl p-6 mt-5">
-        <h2 className="text-xl font-semibold">AI Career Coach</h2>
+        <h2 className="text-xl font-bold">AI Career Coach</h2>
 
         <p className="mt-3 text-gray-700">{data.careerCoach?.overallAdvice}</p>
 
@@ -397,7 +395,7 @@ export default function ResumeResult({ resumeAnalysis }) {
 
       {/* Interview Questions */}
       <div className="bg-white border rounded-xl p-6 mt-5">
-        <h2 className="text-xl font-semibold">Interview Questions</h2>
+        <h2 className="text-xl font-bold">Interview Questions</h2>
 
         <div className="mt-5">
           <h3 className="font-semibold">Technical Questions</h3>

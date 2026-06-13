@@ -4,7 +4,7 @@ import { useState } from "react";
 import { format } from "date-fns";
 import { toast } from "sonner";
 import { ShieldCheck, FileText } from "lucide-react";
-import { Users, MessageSquare , UserCheck, Trash2 } from "lucide-react";
+import { Users, MessageSquare, UserCheck, Trash2 } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -31,7 +31,7 @@ import {
 } from "@/components/ui/alert-dialog";
 
 export default function Dashboard({ stats }) {
-  const [userList, setUserList] = useState([]);
+  const [users, setUsers] = useState(stats.users || []);
   const handleRoleChange = async (userId, role) => {
     try {
       const response = await fetch(`/api/admin/users/${userId}/role`, {
@@ -47,8 +47,7 @@ export default function Dashboard({ stats }) {
       if (!response.ok) {
         throw new Error(data.message);
       }
-
-      setUserList((prev) =>
+      setUsers((prev) =>
         prev.map((user) => (user.id === userId ? { ...user, role } : user)),
       );
 
@@ -77,7 +76,7 @@ export default function Dashboard({ stats }) {
         throw new Error(data.message);
       }
 
-      setUserList((prev) => prev.filter((user) => user.id !== userId));
+      setUsers((prev) => prev.filter((user) => user.id !== userId));
 
       toast.success(data.message);
     } catch (error) {
@@ -174,16 +173,12 @@ export default function Dashboard({ stats }) {
         </Card>
       </div>
 
-
-
-
       <div className="mb-2 mt-8">
         <h1 className="text-2xl font-bold">Latest Users</h1>
       </div>
 
       {/* TABLE */}
       <Card className="mt-4 overflow-hidden rounded-3xl border-0 shadow-lg">
-      
         <CardContent className="p-0">
           {/* Table Header */}
           <div
@@ -212,7 +207,7 @@ export default function Dashboard({ stats }) {
           </div>
 
           {/* Table Body */}
-          {stats.users.map((user) => (
+          {users.map((user) => (
             <div
               key={user.id}
               className="

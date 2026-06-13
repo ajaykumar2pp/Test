@@ -27,7 +27,7 @@ export default async function AdminPage() {
   take: 5,
 });
 
-  console.log("Admin User Data List :", users);
+  // console.log("Admin User Data List :", users);
 
   const totalUsers = await prisma.user.count({
     where: {

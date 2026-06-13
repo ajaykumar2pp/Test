@@ -14,13 +14,16 @@ export default async function UsersPage({ params }) {
     where: {
       id,
     },
+    include: {
+      user: true,
+    },
   });
 
-   if (!resumeAnalysis) {
+  if (!resumeAnalysis) {
     notFound();
   }
 
-  // console.log(resumeAnalysis.aiAnalysis);
+  // console.log(resumeAnalysis);
 
   return <ResumeResult resumeAnalysis={resumeAnalysis} />;
 }

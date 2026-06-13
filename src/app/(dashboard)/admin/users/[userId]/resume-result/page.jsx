@@ -7,16 +7,19 @@ export const metadata = {
 };
 
 export default async function UsersPage({ params }) {
-  const { userId} = await params;
+  const { userId } = await params;
   // console.log("Received ID:", id);
 
   const resumeAnalysis = await prisma.resumeAnalysis.findUnique({
     where: {
-      id : userId,
+      id: userId,
+    },
+    include: {
+      user: true,
     },
   });
 
-   if (!resumeAnalysis) {
+  if (!resumeAnalysis) {
     notFound();
   }
 
