@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function ResumeReport({ data, meta }) {
+export default function ResumeReport({ data }) {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -142,14 +142,14 @@ export default function ResumeReport({ data, meta }) {
               <View style={[styles.card, { backgroundColor: "#eef2ff" }]}>
                 <Text style={styles.label}>Company Name</Text>
                 <Text style={[styles.value, { color: "#4f46e5" }]}>
-                  {meta?.companyName || "Not Provided"}
+                  {data?.companyName || "Not Provided"}
                 </Text>
               </View>
 
               <View style={[styles.card, { backgroundColor: "#ecfeff" }]}>
                 <Text style={styles.label}>Job Title</Text>
                 <Text style={[styles.value, { color: "#0891b2" }]}>
-                  {meta?.jobRole || "Not Provided"}
+                  {data?.jobRole || "Not Provided"}
                 </Text>
               </View>
             </View>
@@ -159,15 +159,15 @@ export default function ResumeReport({ data, meta }) {
               <View style={[styles.card, { backgroundColor: "#fefce8" }]}>
                 <Text style={styles.label}>Resume Name</Text>
                 <Text style={[styles.value, { color: "#ca8a04" }]}>
-                  {meta?.fileName || "Unknown"}
+                  {data?.fileName || "Unknown"}
                 </Text>
               </View>
 
               <View style={[styles.card, { backgroundColor: "#f0fdf4" }]}>
                 <Text style={styles.label}>Analyzed On</Text>
                 <Text style={[styles.value, { color: "#16a34a" }]}>
-                  {meta?.createdAt
-                    ? new Date(meta.createdAt).toLocaleString("en-IN", {
+                  {data?.createdAt
+                    ? new Date(data.createdAt).toLocaleString("en-IN", {
                         day: "2-digit",
                         month: "short",
                         year: "numeric",
@@ -185,12 +185,12 @@ export default function ResumeReport({ data, meta }) {
         <View style={styles.cardRow}>
           <View style={styles.card}>
             <Text style={styles.cardTitle}>ATS Score</Text>
-            <Text style={styles.cardValue}>{data.atsScore}/100</Text>
+            <Text style={styles.cardValue}>{data?.aiAnalysis?.atsScore}/100</Text>
           </View>
 
           <View style={styles.card}>
             <Text style={styles.cardTitle}>Match %</Text>
-            <Text style={styles.cardValue}>{data.matchPercentage}%</Text>
+            <Text style={styles.cardValue}>{data?.aiAnalysis?.matchPercentage}%</Text>
           </View>
 
           <View style={styles.card}>
@@ -203,9 +203,9 @@ export default function ResumeReport({ data, meta }) {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Executive Summary</Text>
 
-          <Text style={styles.paragraph}>{data.resumeSummary}</Text>
+          <Text style={styles.paragraph}>{data?.aiAnalysis?.resumeSummary}</Text>
 
-          <Text style={styles.verdict}>{data.finalVerdict}</Text>
+          <Text style={styles.verdict}>{data?.aiAnalysis?.finalVerdict}</Text>
         </View>
 
         {/* Score Breakdown */}
@@ -213,13 +213,13 @@ export default function ResumeReport({ data, meta }) {
           <Text style={styles.sectionTitle}>Score Breakdown</Text>
 
           <Text>
-            ATS Compatibility: {data.resumeScoreGauge?.atsCompatibility}%
+            ATS Compatibility: {data?.aiAnalysis?.resumeScoreGauge?.atsCompatibility}%
           </Text>
 
-          <Text>Resume Quality: {data.resumeScoreGauge?.resumeQuality}%</Text>
+          <Text>Resume Quality: {data?.aiAnalysis?.resumeScoreGauge?.resumeQuality}%</Text>
 
           <Text>
-            Recruiter Readability: {data.resumeScoreGauge?.recruiterReadability}
+            Recruiter Readability: {data?.aiAnalysis?.resumeScoreGauge?.recruiterReadability}
             %
           </Text>
         </View>
@@ -228,7 +228,7 @@ export default function ResumeReport({ data, meta }) {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Skill Match Analysis</Text>
 
-          {data.skillMatchAnalysis?.matchedSkills?.map((skill, index) => (
+          {data?.aiAnalysis?.skillMatchAnalysis?.matchedSkills?.map((skill, index) => (
             <View key={index} style={styles.skillRow}>
               <Text style={styles.skillLabel}>
                 {skill.skill} ({skill.score}%)
@@ -250,7 +250,7 @@ export default function ResumeReport({ data, meta }) {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Resume Strengths</Text>
 
-          {data.resumeStrengths?.map((item, index) => (
+          {data?.aiAnalysis?.resumeStrengths?.map((item, index) => (
             <Text key={index} style={styles.listItem}>
               • {item}
             </Text>
@@ -261,7 +261,7 @@ export default function ResumeReport({ data, meta }) {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Resume Weaknesses</Text>
 
-          {data.resumeWeaknesses?.map((item, index) => (
+          {data?.aiAnalysis?.resumeWeaknesses?.map((item, index) => (
             <Text key={index} style={styles.listItem}>
               • {item}
             </Text>
@@ -272,7 +272,7 @@ export default function ResumeReport({ data, meta }) {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Missing Keywords</Text>
 
-          {data.missingKeywordsAnalysis?.keywords?.map((keyword, index) => (
+          {data?.aiAnalysis?.missingKeywordsAnalysis?.keywords?.map((keyword, index) => (
             <Text key={index} style={styles.listItem}>
               • {keyword}
             </Text>
@@ -283,7 +283,7 @@ export default function ResumeReport({ data, meta }) {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Improvement Suggestions</Text>
 
-          {data.improvementSuggestions?.map((item, index) => (
+          {data?.aiAnalysis?.improvementSuggestions?.map((item, index) => (
             <Text key={index} style={styles.listItem}>
               • {item}
             </Text>
@@ -294,14 +294,14 @@ export default function ResumeReport({ data, meta }) {
           <Text style={styles.sectionTitle}>AI Career Coach</Text>
 
           <Text style={styles.paragraph}>
-            {data.careerCoach?.overallAdvice}
+            {data?.aiAnalysis?.careerCoach?.overallAdvice}
           </Text>
         </View>
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Recommended Learning Path</Text>
 
-          {data.careerCoach?.recommendedLearningPath?.map((item, index) => (
+          {data?.aiAnalysis?.careerCoach?.recommendedLearningPath?.map((item, index) => (
             <Text key={index}>• {item}</Text>
           ))}
         </View>
@@ -309,7 +309,7 @@ export default function ResumeReport({ data, meta }) {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Interview Questions</Text>
 
-          {data.interviewQuestions?.technical?.map((question, index) => (
+          {data?.aiAnalysis?.interviewQuestions?.technical?.map((question, index) => (
             <Text key={index} style={styles.listItem}>
               {index + 1}. {question}
             </Text>

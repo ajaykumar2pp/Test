@@ -1,0 +1,76 @@
+
+{
+id: 'cmqc0rldq00005834b4da70tm',
+  aiAnalysis: {
+    atsScore: 85,
+    careerCoach: {
+      overallAdvice: 'The candidate has a strong foundation in full stack development and should continue to build on their skills and experience in scalable SaaS applications and AI-powered applications.',
+      nextCareerSteps: [Array],
+      recommendedProjects: [Array],
+      recommendedLearningPath: [Array]
+    },
+    finalVerdict: 'The candidate is a strong fit for the Full Stack Developer position at FutureTech Media House, with a good balance of technical skills and experience in building scalable SaaS applications.',
+    resumeSummary: 'The candidate has a strong background in full stack development with hands-on experience in Next.js, Node.js, and PostgreSQL. They have completed an internship at Appsfactor and have built several projects, including a multi-tenant quotation management system and an AI chat assistant.',
+    matchPercentage: 80,
+    resumeStrengths: [
+      'Strong technical skills in Next.js, Node.js, and PostgreSQL',
+      'Hands-on experience in building scalable SaaS applications',
+      'Good balance of technical skills and experience in building AI-powered applications'
+    ],
+    resumeScoreGauge: {
+      resumeQuality: 80,
+      atsCompatibility: 90,
+      recruiterReadability: 85
+    },
+    resumeWeaknesses: [
+      'Limited experience in CodeIgniter and PHP',
+      'Lack of specific details about achievements and accomplishments in each role'
+    ],
+    interviewQuestions: {
+      hr: [Array],
+      technical: [Array],
+      behavioral: [Array],
+      projectBased: [Array]
+    },
+    skillMatchAnalysis: {
+      matchedSkills: [Array],
+      missingSkills: [Array],
+      recommendedSkills: [Array],
+      skillGapPercentage: 20
+    },
+    sectionWiseAnalysis: {
+      skillsSection: [Object],
+      projectsSection: [Object],
+      educationSection: [Object],
+      experienceSection: [Object],
+      professionalSummary: [Object]
+    },
+    improvementSuggestions: [
+      'Consider adding more specific details about achievements and accomplishments in each role',
+      'Develop skills in CodeIgniter and PHP to improve overall technical skills'
+    ],
+    missingKeywordsAnalysis: {
+      keywords: [Array],
+      atsImpactLevel: 'Medium',
+      priorityKeywords: [Array]
+    }
+  },
+  companyName: 'FutureTech Media House',
+  jobRole: 'Full Stack Developer',
+  fileUrl: 'https://res.cloudinary.com/dxfvprbya/raw/upload/v1781334828/resumes/1781334823935-Ajay-Full-Stack-Developer.pdf',
+  fileName: 'Ajay-Full-Stack-Developer.pdf',
+  fileSize: 114295,
+  fileType: 'application/pdf',
+  createdAt: '2026-06-13T07:13:52.383Z',
+  userId: 'cmqazu3rb0000xc34axfh3r1u',
+  user: {
+    id: 'cmqazu3rb0000xc34axfh3r1u',
+    fullName: 'Raja Kumar',
+    email: 'ajay2kumarpp@gmail.com',
+    password: '$2b$10$fVHxT.2n46HbZe35FnQ9M.m9DnZQ7Shh5s/3cis/.yNnfdC2QzlBC',
+    gender: 'Male',
+    role: 'USER',
+    createdAt: '2026-06-12T14:00:03.720Z',
+    updatedAt: '2026-06-12T14:00:03.720Z'
+  }
+}

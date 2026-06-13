@@ -8,6 +8,8 @@ export async function POST(req) {
     const body = await req.json();
     const { email, reportData } = body;
 
+    // console.log("Reported Data Check :", reportData)
+
     if (!email) {
       return Response.json(
         { success: false, message: "Email is required" },

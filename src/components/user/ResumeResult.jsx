@@ -21,10 +21,11 @@ export default function ResumeResult({ resumeAnalysis }) {
   // console.log("check User Email via user... :", resumeAnalysis?.user?.email);
 
   const [emailLoading, setEmailLoading] = useState(false);
-  const data = resumeAnalysis?.aiAnalysis;
+  // const data = resumeAnalysis?.aiAnalysis;
+  const pdfData = resumeAnalysis;
   // console.log("company data :", resumeAnalysis)
 
-  if (!data) {
+  if (!pdfData) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
         <h2 className="text-xl font-semibold text-gray-500">
@@ -51,7 +52,7 @@ export default function ResumeResult({ resumeAnalysis }) {
         },
         body: JSON.stringify({
           email,
-          reportData: data,
+          reportData: pdfData,
         }),
       });
 
@@ -164,7 +165,7 @@ export default function ResumeResult({ resumeAnalysis }) {
 
         {/* Download PDF Button */}
         <PDFDownloadLink
-          document={<ResumeReport data={data} meta={resumeAnalysis} />}
+          document={<ResumeReport data={pdfData} />}
           fileName="resume-analysis-report.pdf"
           className="w-full"
         >
@@ -301,20 +302,20 @@ export default function ResumeResult({ resumeAnalysis }) {
 
       {/* Header */}
       <div className="bg-white border rounded-xl shadow-sm p-6 mt-5">
-        <h1 className="text-xl  font-bold">ATS Score: {data.atsScore}/100</h1>
+        <h1 className="text-xl  font-bold">ATS Score: {pdfData?.aiAnalysis?.atsScore}/100</h1>
 
         <p className="mt-2 text-gray-600">
-          Match Percentage: {data.matchPercentage}%
+          Match Percentage: {pdfData?.aiAnalysis?.matchPercentage}%
         </p>
 
-        <p className="mt-4 text-gray-700">{data.finalVerdict}</p>
+        <p className="mt-4 text-gray-700">{pdfData?.aiAnalysis?.finalVerdict}</p>
       </div>
 
       {/* Resume Summary */}
       <div className="bg-white border rounded-xl p-6 mt-5 ">
         <h2 className="text-xl font-semibold mb-3">Resume Summary</h2>
 
-        <p className="text-gray-700">{data.resumeSummary}</p>
+        <p className="text-gray-700">{pdfData?.aiAnalysis?.resumeSummary}</p>
       </div>
 
       {/* Score Gauges */}
@@ -322,21 +323,21 @@ export default function ResumeResult({ resumeAnalysis }) {
         <div className="border rounded-xl p-5 bg-white">
           <h3 className="text-xl  font-bold">ATS Compatibility</h3>
           <p className="text-3xl font-bold mt-2">
-            {data.resumeScoreGauge?.atsCompatibility}%
+            {pdfData?.aiAnalysis?.resumeScoreGauge?.atsCompatibility}%
           </p>
         </div>
 
         <div className="border rounded-xl p-5 bg-white">
           <h3 className="text-xl  font-bold">Resume Quality</h3>
           <p className="text-3xl font-bold mt-2">
-            {data.resumeScoreGauge?.resumeQuality}%
+            {pdfData?.aiAnalysis?.resumeScoreGauge?.resumeQuality}%
           </p>
         </div>
 
         <div className="border rounded-xl p-5 bg-white">
           <h3 className="text-xl  font-bold">Recruiter Readability</h3>
           <p className="text-3xl font-bold mt-2">
-            {data.resumeScoreGauge?.recruiterReadability}%
+            {pdfData?.aiAnalysis?.resumeScoreGauge?.recruiterReadability}%
           </p>
         </div>
       </div>
@@ -346,7 +347,7 @@ export default function ResumeResult({ resumeAnalysis }) {
         <h2 className="text-xl font-bold mb-4">Skill Match Analysis</h2>
 
         <div className="space-y-4">
-          {data.skillMatchAnalysis?.matchedSkills?.map((skill, index) => (
+          {pdfData?.aiAnalysis?.skillMatchAnalysis?.matchedSkills?.map((skill, index) => (
             <div key={index}>
               <div className="flex justify-between mb-1">
                 <span>{skill.skill}</span>
@@ -371,7 +372,7 @@ export default function ResumeResult({ resumeAnalysis }) {
         <h2 className="text-xl font-bold text-red-600">Missing Skills</h2>
 
         <div className="flex flex-wrap gap-2 mt-4">
-          {data.skillMatchAnalysis?.missingSkills?.map((skill, index) => (
+          {pdfData?.aiAnalysis?.skillMatchAnalysis?.missingSkills?.map((skill, index) => (
             <span
               key={index}
               className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm"
@@ -387,7 +388,7 @@ export default function ResumeResult({ resumeAnalysis }) {
         <h2 className="text-xl font-bold text-blue-600">Recommended Skills</h2>
 
         <div className="flex flex-wrap gap-2 mt-4">
-          {data.skillMatchAnalysis?.recommendedSkills?.map((skill, index) => (
+          {pdfData?.aiAnalysis?.skillMatchAnalysis?.recommendedSkills?.map((skill, index) => (
             <span
               key={index}
               className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm"
@@ -403,7 +404,7 @@ export default function ResumeResult({ resumeAnalysis }) {
         <h2 className="text-xl font-bold text-green-600">Resume Strengths</h2>
 
         <ul className="list-disc ml-6 mt-4 space-y-2">
-          {data.resumeStrengths?.map((item, index) => (
+          {pdfData?.aiAnalysis?.resumeStrengths?.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
@@ -414,7 +415,7 @@ export default function ResumeResult({ resumeAnalysis }) {
         <h2 className="text-xl font-bold text-red-600">Resume Weaknesses</h2>
 
         <ul className="list-disc ml-6 mt-4 space-y-2">
-          {data.resumeWeaknesses?.map((item, index) => (
+          {pdfData?.aiAnalysis?.resumeWeaknesses?.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
@@ -425,7 +426,7 @@ export default function ResumeResult({ resumeAnalysis }) {
         <h2 className="text-xl font-bold">Missing Keywords</h2>
 
         <div className="flex flex-wrap gap-2 mt-4">
-          {data.missingKeywordsAnalysis?.keywords?.map((keyword, index) => (
+          {pdfData?.aiAnalysis?.missingKeywordsAnalysis?.keywords?.map((keyword, index) => (
             <span
               key={index}
               className="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm"
@@ -441,7 +442,7 @@ export default function ResumeResult({ resumeAnalysis }) {
         <h2 className="text-xl font-bold">Improvement Suggestions</h2>
 
         <ul className="list-disc ml-6 mt-4 space-y-2">
-          {data.improvementSuggestions?.map((item, index) => (
+          {pdfData?.aiAnalysis?.improvementSuggestions?.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
@@ -451,13 +452,13 @@ export default function ResumeResult({ resumeAnalysis }) {
       <div className="bg-white border rounded-xl p-6 mt-5">
         <h2 className="text-xl font-bold">AI Career Coach</h2>
 
-        <p className="mt-3 text-gray-700">{data.careerCoach?.overallAdvice}</p>
+        <p className="mt-3 text-gray-700">{pdfData?.aiAnalysis?.careerCoach?.overallAdvice}</p>
 
         <div className="mt-6">
           <h3 className="font-semibold mb-2">Recommended Learning Path</h3>
 
           <ul className="list-disc ml-6">
-            {data.careerCoach?.recommendedLearningPath?.map((item, index) => (
+            {pdfData?.aiAnalysis?.careerCoach?.recommendedLearningPath?.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
           </ul>
@@ -472,7 +473,7 @@ export default function ResumeResult({ resumeAnalysis }) {
           <h3 className="font-semibold">Technical Questions</h3>
 
           <ul className="list-disc ml-6 mt-2">
-            {data.interviewQuestions?.technical?.map((question, index) => (
+            {pdfData?.aiAnalysis?.interviewQuestions?.technical?.map((question, index) => (
               <li key={index}>{question}</li>
             ))}
           </ul>
@@ -482,7 +483,7 @@ export default function ResumeResult({ resumeAnalysis }) {
           <h3 className="font-semibold">HR Questions</h3>
 
           <ul className="list-disc ml-6 mt-2">
-            {data.interviewQuestions?.hr?.map((question, index) => (
+            {pdfData?.aiAnalysis?.interviewQuestions?.hr?.map((question, index) => (
               <li key={index}>{question}</li>
             ))}
           </ul>

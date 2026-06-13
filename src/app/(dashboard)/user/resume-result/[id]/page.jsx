@@ -23,7 +23,7 @@ export default async function UsersPage({ params }) {
     notFound();
   }
 
-  // console.log(resumeAnalysis);
+  // console.log("Resume Result Show",resumeAnalysis);
 
   return <ResumeResult resumeAnalysis={resumeAnalysis} />;
 }
