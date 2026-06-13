@@ -45,19 +45,19 @@ export function DataTable({ columns, data }) {
 
   return (
     <div className="space-y-4">
+      {/* Hero Section */}
       <div
         className="
-    relative overflow-hidden
-    rounded-3xl p-6 md:p-8
-    bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600
-    text-white shadow-xl
-  "
+      relative overflow-hidden
+      rounded-3xl p-5 sm:p-6 md:p-8
+      bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600
+      text-white shadow-xl
+    "
       >
-        {/* subtle glow background */}
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top_left,white,transparent_60%)]" />
 
         <div className="relative space-y-2">
-          <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight">
             User Management Dashboard
           </h1>
 
@@ -69,13 +69,12 @@ export function DataTable({ columns, data }) {
       </div>
 
       {/* Search */}
-
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <Input
           placeholder="Search by name or email..."
           value={globalFilter ?? ""}
           onChange={(e) => setGlobalFilter(e.target.value)}
-          className="max-w-sm"
+          className="w-full sm:max-w-sm"
         />
 
         <div className="text-sm text-muted-foreground">
@@ -87,9 +86,8 @@ export function DataTable({ columns, data }) {
       </div>
 
       {/* Table */}
-
-      <div className="rounded-xl border">
-        <Table>
+      <div className="rounded-xl border overflow-x-auto">
+        <Table className="min-w-225">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -134,14 +132,13 @@ export function DataTable({ columns, data }) {
       </div>
 
       {/* Pagination */}
-
-      <div className="flex items-center justify-between">
-        <div className="text-sm text-muted-foreground">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="text-sm text-muted-foreground text-center sm:text-left">
           Showing {table.getRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} users
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex flex-wrap justify-center gap-2">
           <Button
             variant="outline"
             size="sm"

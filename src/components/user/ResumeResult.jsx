@@ -73,59 +73,137 @@ export default function ResumeResult({ resumeAnalysis }) {
   };
 
   return (
-    <div className="rounded-2xl border bg-white p-6 ">
-      {/*  Link */}
-      <div className="w-full flex justify-end gap-5 print:hidden">
-        {/* email button */}
+    <div className="rounded-2xl">
+      {/* Action Buttons */}
+      <div
+        className="
+    print:hidden
+    grid
+    grid-cols-1
+    sm:grid-cols-2
+    xl:grid-cols-3
+    gap-3
+    w-full
+  "
+      >
+        {/* Email Button */}
         <button
           onClick={sendReportEmail}
           disabled={emailLoading}
-          className="no-print group relative overflow-hidden rounded-xl bg-linear-to-r from-emerald-600 via-teal-600 to-cyan-600 px-6 py-3 font-semibold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-emerald-500/40 cursor-pointer disabled:opacity-50"
+          className="
+      w-full
+      min-h-13
+      group
+      relative
+      overflow-hidden
+      rounded-xl
+      bg-linear-to-r
+      from-emerald-600
+      via-teal-600
+      to-cyan-600
+      px-4
+      py-3
+      font-semibold
+      text-white
+      shadow-xl
+      transition-all
+      duration-300
+      sm:hover:-translate-y-1
+      hover:shadow-emerald-500/40
+      disabled:opacity-50
+      disabled:cursor-not-allowed
+      cursor-pointer
+    "
         >
-          <span className="relative flex items-center gap-2">
+          <span className="relative flex items-center justify-center gap-2 text-sm sm:text-base">
             {emailLoading ? (
               <>
-                <Loader className="h-5 w-5 animate-spin" />
+                <Loader className="h-5 w-5 animate-spin shrink-0" />
                 Sending...
               </>
             ) : (
               <>
-                <Mail className="h-5 w-5" />
+                <Mail className="h-5 w-5 shrink-0" />
                 Send to Email
               </>
             )}
           </span>
         </button>
 
-        {/* Print PDF  */}
+        {/* Print PDF Button */}
         <button
           onClick={() => window.print()}
-          className="no-print group relative overflow-hidden rounded-xl bg-linear-to-r from-gray-700 via-gray-800 to-black px-6 py-3 font-semibold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-black/40 cursor-pointer"
+          className="
+      w-full
+      min-h-13
+      group
+      relative
+      overflow-hidden
+      rounded-xl
+      bg-linear-to-r
+      from-gray-700
+      via-gray-800
+      to-black
+      px-4
+      py-3
+      font-semibold
+      text-white
+      shadow-xl
+      transition-all
+      duration-300
+      sm:hover:-translate-y-1
+      hover:shadow-black/40
+      cursor-pointer
+    "
         >
-          <span className="relative flex items-center gap-2">
-            <Printer className="h-5 w-5" />
+          <span className="relative flex items-center justify-center gap-2 text-sm sm:text-base">
+            <Printer className="h-5 w-5 shrink-0" />
             Print Report
           </span>
         </button>
 
-        {/* PDF Download Link */}
+        {/* Download PDF Button */}
         <PDFDownloadLink
           document={<ResumeReport data={data} meta={resumeAnalysis} />}
           fileName="resume-analysis-report.pdf"
+          className="w-full"
         >
           {({ loading }) => (
-            <button className="group relative overflow-hidden rounded-xl bg-linear-to-r from-violet-600 via-purple-600 to-indigo-600 px-6 py-3 font-semibold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-violet-500/40 cursor-pointer">
-              <span className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full " />
+            <button
+              className="
+          w-full
+          min-h-13
+          group
+          relative
+          overflow-hidden
+          rounded-xl
+          bg-linear-to-r
+          from-violet-600
+          via-purple-600
+          to-indigo-600
+          px-4
+          py-3
+          font-semibold
+          text-white
+          shadow-xl
+          transition-all
+          duration-300
+          sm:hover:-translate-y-1
+          hover:shadow-violet-500/40
+          cursor-pointer
+        "
+            >
+              <span className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
 
-              <span className="relative flex items-center gap-2">
+              <span className="relative flex items-center justify-center gap-2 text-sm sm:text-base">
                 {loading ? (
                   <>
-                    <Loader className="h-5 w-5 animate-spin" />
+                    <Loader className="h-5 w-5 animate-spin shrink-0" />
                     Generating PDF...
                   </>
                 ) : (
                   <>
-                    <Download className="h-5 w-5 transition-transform duration-300 group-hover:translate-y-0.5" />
+                    <Download className="h-5 w-5 shrink-0 transition-transform duration-300 group-hover:translate-y-0.5" />
                     Download ATS Report
                   </>
                 )}
@@ -134,7 +212,6 @@ export default function ResumeResult({ resumeAnalysis }) {
           )}
         </PDFDownloadLink>
       </div>
-
       {/* Company Name or Position */}
       <div className="mt-5 rounded-2xl border bg-white p-6 shadow-sm">
         <div className="mb-5">
@@ -307,9 +384,7 @@ export default function ResumeResult({ resumeAnalysis }) {
 
       {/* Recommended Skills */}
       <div className="bg-white border rounded-xl p-6 mt-5">
-        <h2 className="text-xl font-bold text-blue-600">
-          Recommended Skills
-        </h2>
+        <h2 className="text-xl font-bold text-blue-600">Recommended Skills</h2>
 
         <div className="flex flex-wrap gap-2 mt-4">
           {data.skillMatchAnalysis?.recommendedSkills?.map((skill, index) => (
@@ -325,9 +400,7 @@ export default function ResumeResult({ resumeAnalysis }) {
 
       {/* Resume Strengths */}
       <div className="bg-white border rounded-xl p-6 mt-5">
-        <h2 className="text-xl font-bold text-green-600">
-          Resume Strengths
-        </h2>
+        <h2 className="text-xl font-bold text-green-600">Resume Strengths</h2>
 
         <ul className="list-disc ml-6 mt-4 space-y-2">
           {data.resumeStrengths?.map((item, index) => (
@@ -338,9 +411,7 @@ export default function ResumeResult({ resumeAnalysis }) {
 
       {/* Resume Weaknesses */}
       <div className="bg-white border rounded-xl p-6 mt-5">
-        <h2 className="text-xl font-bold text-red-600">
-          Resume Weaknesses
-        </h2>
+        <h2 className="text-xl font-bold text-red-600">Resume Weaknesses</h2>
 
         <ul className="list-disc ml-6 mt-4 space-y-2">
           {data.resumeWeaknesses?.map((item, index) => (

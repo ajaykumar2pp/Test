@@ -64,33 +64,33 @@ export default async function Dashboard({ stats, analyses }) {
   return (
     <div className="min-h-screen">
       {/* Main */}
-      <div className="p-6">
-        {/* Hero */}
-        <div
-          className={`
+
+      {/* Hero */}
+      <div
+        className={`
             mb-8 rounded-[32px]
             bg-linear-to-r
             ${theme.hero}
             p-8 text-white shadow-xl
           `}
-        >
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <h2 className="mb-3 text-4xl font-bold leading-tight">
-                Improve Your Resume
-                <br />
-                with AI 🚀
-              </h2>
+      >
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <h2 className="mb-3 text-4xl font-bold leading-tight">
+              Improve Your Resume
+              <br />
+              with AI 🚀
+            </h2>
 
-              <p className={`max-w-2xl text-sm md:text-base ${theme.heroText}`}>
-                Upload your resume and get ATS score, keyword analysis,
-                formatting suggestions, and personalized improvements instantly.
-              </p>
-            </div>
+            <p className={`max-w-2xl text-sm md:text-base ${theme.heroText}`}>
+              Upload your resume and get ATS score, keyword analysis, formatting
+              suggestions, and personalized improvements instantly.
+            </p>
+          </div>
 
-            <Link href="/user/upload-resume">
-              <Button
-                className={`
+          <Link href="/user/upload-resume">
+            <Button
+              className={`
                   h-12 rounded-2xl bg-white px-6
                   hover:bg-slate-100
                   shadow-md transition-all duration-300
@@ -98,18 +98,18 @@ export default async function Dashboard({ stats, analyses }) {
                   cursor-pointer
                   ${theme.button}
                 `}
-              >
-                <Upload className="mr-2 h-5 w-5" />
-                Upload Resume
-              </Button>
-            </Link>
-          </div>
+            >
+              <Upload className="mr-2 h-5 w-5" />
+              Upload Resume
+            </Button>
+          </Link>
         </div>
+      </div>
 
-        {/* Stats */}
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {/* ATS */}
-          {/* <Card
+      {/* Stats */}
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        {/* ATS */}
+        {/* <Card
             className={`
               rounded-[28px] border-0 shadow-sm
               transition-all duration-300
@@ -136,29 +136,27 @@ export default async function Dashboard({ stats, analyses }) {
             </CardContent>
           </Card> */}
 
-          {/* Uploaded */}
-          <Card className="rounded-[28px] border-0 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-slate-500">
-                    Total Analyzed Resumes
-                  </p>
+        {/* Uploaded */}
+        <Card className="rounded-[28px] border-0 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-slate-500">Total Analyzed Resumes</p>
 
-                  <h3 className="mt-2 text-3xl font-bold text-slate-800">
-                    {stats.totalAnalyses}
-                  </h3>
-                </div>
-
-                <div className="rounded-2xl bg-emerald-100 p-3">
-                  <FileText className="h-6 w-6 text-emerald-600" />
-                </div>
+                <h3 className="mt-2 text-3xl font-bold text-slate-800">
+                  {stats.totalAnalyses}
+                </h3>
               </div>
-            </CardContent>
-          </Card>
 
-          {/* Jobs */}
-          {/* <Card className="rounded-[28px] border-0 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+              <div className="rounded-2xl bg-emerald-100 p-3">
+                <FileText className="h-6 w-6 text-emerald-600" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Jobs */}
+        {/* <Card className="rounded-[28px] border-0 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -174,8 +172,8 @@ export default async function Dashboard({ stats, analyses }) {
             </CardContent>
           </Card> */}
 
-          {/* Suggestions */}
-          {/* <Card
+        {/* Suggestions */}
+        {/* <Card
             className={`
               rounded-[28px] border-0 shadow-sm
               hover:-translate-y-1 hover:shadow-lg
@@ -199,16 +197,14 @@ export default async function Dashboard({ stats, analyses }) {
               </div>
             </CardContent>
           </Card> */}
-        </div>
+      </div>
 
-        {/* Card Add */}
+      {/* Card Add */}
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3 mt-5">
-          {analyses.map((resume) => (
-            <ResumeCard key={resume.id} resume={resume} />
-          ))}
-        </div>
-      
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3 mt-5">
+        {analyses.map((resume) => (
+          <ResumeCard key={resume.id} resume={resume} />
+        ))}
       </div>
     </div>
   );
